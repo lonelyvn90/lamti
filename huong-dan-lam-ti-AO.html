@@ -215,13 +215,12 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
   <header class="head">
     <div>
       <h1><span class="q">lam` ti'</span> AO</h1>
-      <p class="tag">Tool tự clean-up scene xe, bake Ambient Occlusion bằng Arnold rồi export sang
-         Substance Painter. Chạy lần lượt theo thứ tự bên dưới.</p>
+      <p class="tag">Render Dilation - Setup scene bake AO&nbsp;&nbsp;</p>
     </div>
     <div class="meta">
       <b>lamti_tools.ms</b><br>
-      Dùng trong 3ds Max<br>
-      Nút xanh trên cùng: collapse / expand panel
+      
+      
       <div class="swatches">
         <i style="background:var(--blue)"></i><i style="background:var(--nmap)"></i>
         <i style="background:var(--orange)"></i><i style="background:var(--green)"></i>
@@ -295,79 +294,55 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
 
     <!-- ============ RIGHT ============ -->
     <div>
-      <h2>Thứ tự chạy <small>chạy lần lượt từ trên xuống</small></h2>
-
-      <div class="step"><div class="k">1</div><div>
+<div class="step"><div class="k">1</div><div>
         <h3>Save file trước</h3>
-        <p>Tool delete bớt object trong scene. Có undo, nhưng nên giữ một bản save riêng.</p>
-      </div></div>
+        <p>Làm gì làm save file cái đã.&nbsp;&nbsp;</p>
+    </div></div>
 
       <div class="step"><div class="k">2</div><div>
         <h3>Set output folder</h3>
-        <p>Bấm <span class="mono">...</span> ở group Output. Mọi file dilation và file AO đều lưu vào đây.
-           Để trống thì tới lúc bake tool mới hỏi. Right-click nút đó để mở folder.</p>
+        <p>Chọn đường dẫn save file render. Click chụt phải mở folder.&nbsp; &nbsp; &nbsp;</p>
       </div></div>
 
       <div class="step"><div class="k">3</div><div>
-        <h3>Render Dilation <span class="pill" style="margin-left:6px">group Render Dilation</span></h3>
-        <p>Render map theo Material ID để lấy phần dilation. Tất cả các nút đều chạy trên object
-           đang select trong viewport.</p>
-        <div class="defs">
-          <div class="def"><b>Size</b><p>Resolution file render, từ 512 tới 8192.</p></div>
-          <div class="def"><b>Solid / Wire</b><p>Màu fill và màu wire của từng Material ID.</p></div>
-          <div class="def"><b>CarPaint Details</b><p>Lọc material tên <span class="mono">carpaint</span>, render ở map channel 1.</p></div>
-          <div class="def"><b>Details</b><p>Render phần còn lại, trừ danh sách material loại trừ. Object có chữ
-             <span class="mono">wheel</span> (không tính steering_wheel, caliper, emissive) được tách thành pass Rim riêng.</p></div>
-          <div class="def"><b>Glass · LOD</b><p>Lọc theo material tên <span class="mono">glass</span> và
-             <span class="mono">LOD</span>, map channel 1.</p></div>
-          <div class="def"><b>Channel 2</b><p>CarPaint và Details_NM làm y hệt nhưng đọc map channel 2.</p></div>
-          <div class="def"><b>For lazy people</b><p>Chạy liền cả 6 pass trên, khỏi bấm từng nút.</p></div>
-        </div>
+        <h3>Render Dilation </h3>
+        <p>Quét chọn hết xe&nbsp; bấm render từng tấm hoặc "For lazy people" để render tất cả dilation.&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+        <div class="defs"> </div>
       </div></div>
 
       <div class="step"><div class="k">4</div><div>
-        <h3>AO Setup <span class="pill" style="margin-left:6px">group Setup - Render AO</span></h3>
-        <p>Tool tự clean-up scene: switch renderer sang Arnold, collapse modifier stack,
-           delete object trong layer exceptions và LOD2, LOD3, LOD5, delete face tires,
-           underneath, licenseplate.</p>
-        <p>Sau đó detach cho khỏi dính nhau: carpaint sang phải, glass sang trái, grid xuống dưới.
-           Wheel FL được xoay dựng lên và xếp thành hàng. Hood, door, trunk, wing mở ra.</p>
-        <p>Kết quả còn 3 object: <span class="mono">CARPAINT_attribute_blue</span>,
-           <span class="mono">DETAILS_attribute_blue</span>, <span class="mono">LOD4</span>,
-           kèm một ground plane để hứng occlusion.</p>
-        <div class="ask"><b>Tool hỏi:</b> caliper trước và sau có khác nhau không?
-           Yes là giữ luôn caliper BL phía sau, No chỉ giữ bộ FL phía trước.</div>
+        <h3>AO Setup </h3>
+        <p>Bấm AO Setup để tự open part.</p>
+<div class="ask"><b>Tool hỏi:</b> caliper trước và sau có khác nhau không?
+  có thì bấm Yes,không thì bấm No.</div>
       </div></div>
 
       <div class="step"><div class="k">5</div><div>
         <h3>Bake AO</h3>
-        <p>Bấm lần lượt 3 nút theo tên object. Mỗi nút tự assign Standard material, set thông số map
-           rồi bake luôn, không cần thao tác gì trong cửa sổ Bake to Texture.</p>
-        <div class="ask"><b>Tool hỏi:</b> có test render không?
-           Yes hạ resolution và samples xuống cho nhanh, No là bake full. Bake xong tool báo đường dẫn file PNG.</div>
+<div class="ask"><b>Tool hỏi:</b> có test render không?
+  Yes thì render luôn ở 2048,No thì render 512.</div>
         <div class="defs">
-          <div class="def"><b>CARPAINT<br>DETAILS<br>LOD4</b><p>Bake AO cho đúng object cùng tên đã attach ở bước 3.</p></div>
-          <div class="def"><b>Custom Bake</b><p>Làm y hệt nhưng cho object đang select, dùng khi object không đúng tên chuẩn.
-             Select từ 2 object trở lên là tool báo lỗi.</p></div>
+          <div class="def"><b>CARPAINT<br>DETAILS<br>LOD4</b><p>Render tấm nào thì bấm nút theo tên.&nbsp;</p>
+          </div>
+          <div class="def"><b>Custom Bake</b><p>Bake selection.</p>
+          </div>
         </div>
       </div></div>
 
       <div class="step"><div class="k">6</div><div>
-        <h3>Sang Substance <span class="pill" style="margin-left:6px">group Set for Paint &amp; Check</span></h3>
-        <p>Dựng lại scene để check rồi hand-off sang Substance Painter.</p>
-        <div class="defs">
-          <div class="def"><b>Setup export<br>Substance &amp; Check</b><p>Detach, move, rotate và open part lần nữa.
-             Tool hỏi <span class="mono">Open the part?</span> trước; chọn No thì grid giữ nguyên và bỏ qua bước mở
-             hood, door, trunk, wing.</p></div>
-          <div class="def"><b>Add PBR Material</b><p>Tạo material PBR Metal/Rough riêng cho CARPAINT và DETAILS.
-             Nút <span class="mono">...</span> bên cạnh trỏ tới folder texture, tool tự tìm và gán 5 map theo tên file.</p></div>
-          <div class="def"><b>HDRI Reflections</b><p>Bật environment HDRI cho reflection. Nút <span class="mono">...</span>
-             chọn file .hdr hoặc .exr. Bản sharp lo reflection và GI, bản blur làm background.</p></div>
-          <div class="def"><b>Export FBX<br>for Substance</b><p>Export selection ra FBX. Nút <span class="mono">...</span>
-             để chỉ đường dẫn Substance Painter.exe khi tool không tự tìm được.</p></div>
-          <div class="def"><b>Launch Substance<br>Painter</b><p>Tick sẵn thì export xong, nếu Painter chưa chạy,
-             tool mở app và tạo project mới với file FBX vừa export.</p></div>
-        </div>
+        <h3>Setup export Substance &amp; Check&nbsp; &nbsp;&nbsp; </h3>
+<div class="defs">
+  <div class="def"><b>Setup export<br>Substance &amp; Check</b><p>Open part để export fbx sang substance.&nbsp;</p>
+  </div>
+          <div class="def"><b>Add PBR Material</b><p>Tạo chất liệu để check trong 3dsmax trước khi vào Engine (dẫn đường dẫn chứa maps đúng tên sẽ tự nhận)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+          </div>
+          <div class="def"><b>HDRI Reflections</b><p>Thích thì bật HDRI làm chút màu mè.&nbsp;</p>
+          </div>
+          <div class="def"><b>Export FBX<br>for Substance</b><p>Chỉ là xuất ra fbx.&nbsp;</p>
+          </div>
+          <div class="def"><b>Launch Substance<br>Painter</b><p>Lười chưa bật substance thì tick vào nó tự bật lên sau khi xuất fbx thôi.</p>
+          </div>
+      </div>
       </div></div>
 
     </div>
@@ -375,26 +350,26 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
 
   <div class="bottom" style="grid-template-columns:1fr">
     <div style="max-width:620px">
-      <h2>Thông số bake AO <small>tool tự set, không cần chỉnh tay</small></h2>
+      <h2>Thông số bake AO </h2>
       <table>
         <tr><td>Renderer</td><td>Arnold</td></tr>
         <tr><td>Map type</td><td>Ambient Occlusion</td></tr>
         <tr><td>Projection</td><td>Self</td></tr>
         <tr><td>UV Channel</td><td>1</td></tr>
-        <tr><td>Resolution</td><td>2048, test render 512</td></tr>
+        <tr><td>Resolution</td><td>2048, test&nbsp; 512</td></tr>
         <tr><td>Padding</td><td>8 px</td></tr>
         <tr><td>Format</td><td>PNG</td></tr>
         <tr><td>Output To</td><td>Original Material</td></tr>
-        <tr><td>Samples</td><td>128, test render 64</td></tr>
+        <tr><td>Samples</td><td>128, test  64</td></tr>
         <tr><td>Spread / Falloff</td><td>1.0 / 0.001</td></tr>
-        <tr><td>Output path</td><td>folder ở group Output</td></tr>
+        <tr><td>Output path</td><td>folder bro chọn</td></tr>
       </table>
     </div>
   </div>
 
   <div class="sign">
-    <span>Hướng dẫn cho tool lamti_tools.ms</span>
-    <span>from A.I - hen xui</span>
+    <span>Hướng dẫn cho  lamti_tools.ms</span>
+    <span>tools from A.I nên hên xui nhé!</span>
   </div>
 
 </div>
@@ -402,20 +377,17 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
 
   <header class="head">
     <div>
-      <h1><span class="a">Normal</span> · <span class="b">Color</span> · <span class="c">Select</span></h1>
-      <p class="tag">Ba nút màu dưới cùng của panel lam` ti'. Hai nút đầu bake map từ high poly
-        xuống low poly. Nút cuối là bộ select linked dùng khi edit mesh.</p>
-    </div>
+      <h1><span class="a">lam` ti' Normal</span> · <span class="b">Color</span> · <span class="c">Select</span></h1>
+</div>
     <div class="meta">
       <b>lamti_tools.ms</b><br>
-      Dùng trong 3ds Max<br>
-      Mở được cả khi panel chính đang collapse
+      
     </div>
   </header>
 
   <!-- ================= NORMAL + COLOR ================= -->
   <div class="band big">
-    <h2>Normal và Color <small>workflow giống hệt nhau, chỉ khác renderer và vài option</small></h2>
+    <h2>Normal và Color <small>là bake    normal và color thôi.</small></h2>
 
     <div class="three">
 
@@ -485,50 +457,38 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
       <!-- steps -->
       <div>
         <div class="step"><div class="k">1</div><div>
-          <h3>Ghép cặp high – low</h3>
-          <p>Bấm <span class="mono">Pick High Poly</span> rồi click high poly trong scene.
-             Bấm <span class="mono">Pick Low Poly</span> rồi click low poly. Cuối cùng bấm
-             <span class="mono">Add Pair &gt;&gt;</span> để đưa cặp vào list.</p>
-          <p>Muốn bỏ thì chọn dòng rồi bấm <span class="mono">Remove Selected</span>,
-             hoặc <span class="mono">Clear All</span> để xóa hết list.</p>
-        </div></div>
+          <h3>Pick high – low</h3>
+          <p><span class="mono"> Pick high - low rồi addpair,có thể add nhiều cặp,không quan trọng tên tuổi quê quán.&nbsp; &nbsp;&nbsp;</span><span class="mono">&nbsp;</span></p>
+</div></div>
 
         <div class="step"><div class="k">2</div><div>
           <h3>Set bake settings</h3>
-          <p>Map Size là resolution, Format là định dạng file, Padding là phần dilation loang ra
-             ngoài UV shell. UV Channel là map channel của low poly.</p>
-          <div class="note"><b>Push Amount</b> là độ push của cage bao quanh low poly.
-             Push thiếu thì map bị thủng, push dư thì cage bắt nhầm chi tiết bên cạnh. Chỉnh từ từ.</div>
+          <p>Thường chỉnh cái push amount thôi,highpoly dày cơm thì push cao.</p>
+          <div class="note"><b>Push Amount</b> là độ xa gần của cage bao quanh low poly.</div>
         </div></div>
 
         <div class="step"><div class="k">3</div><div>
           <h3>Set output folder</h3>
-          <p>Bấm <span class="mono">Browse...</span> để chọn folder, right-click nút đó để mở folder
-             đang set. Ô <span class="mono">Filename Suffix</span> là hậu tố tên file, mặc định
-             <span class="mono">_Normal</span> và <span class="mono">_Color</span>.</p>
+          <p>Chụt phải mở folder lưu file.&nbsp;</p>
         </div></div>
 
         <div class="step"><div class="k">4</div><div>
           <h3>Bake</h3>
-          <p><span class="mono">Bake Selected</span> chỉ chạy các dòng đang chọn trong list,
-             <span class="mono">Bake All Pairs</span> chạy hết. Progress bar và dòng status dưới cùng
-             cho biết đang bake tới file nào.</p>
-          <p>Bake xong tool tự đóng Arnold RenderView và isolate low poly vừa bake để check luôn.</p>
-        </div></div>
+          <p><span class="mono">Bake Selected thôi cho dễ quản lý.</span> </p>
+</div></div>
 
         <div class="step"><div class="k">5</div><div>
-          <h3>Tool tự lo phần còn lại</h3>
-          <p>Tự switch renderer, assign Standard material, thêm modifier Projection và push cage
-             theo Push Amount, rồi nối map vào material của low poly.</p>
+          <h3>Show&nbsp;</h3>
+          <p>&nbsp;Tự add map và isolate low poly để check liền sau khi render xong.&nbsp; &nbsp; &nbsp;</p>
         </div></div>
       </div>
     </div>
 
-    </div>
+  </div>
 
     <!-- ================= SELECT ================= -->
   <div class="band sel">
-    <h2>Select <small>select linked khi đang edit mesh</small></h2>
+    <h2>Select <small>giống select linked bên Blender&nbsp;</small></h2>
     <div class="two">
       <div class="panel">
         <div class="tbar" style="background:#2e7d32"><span class="ico"></span>lam` ti' Select<span class="x">✕</span></div>
@@ -552,25 +512,26 @@ body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
 
       <div>
         <p style="font-size:13px;color:#c2c9cb;line-height:1.5;margin-bottom:14px">
-          Trước khi bấm: select object, vào sub-object level và chọn sẵn ít nhất một face.
-          Bốn nút đầu lan selection ra xung quanh, mỗi nút dừng ở một ranh giới khác nhau.</p>
+          Quy tắc là chọn face trước rồi mới bấm nút</p>
         <div class="defs">
-          <div class="def"><b>Element</b><p>Lan hết element đang dính liền nhau.</p></div>
-          <div class="def"><b>Material</b><p>Lan ra nhưng dừng khi gặp Material ID khác.</p></div>
-          <div class="def"><b>Smoothgroup</b><p>Lan ra nhưng dừng ở hard edge, tức chỗ đổi smoothing group.</p></div>
-          <div class="def"><b>UV Island</b><p>Lan ra nhưng dừng ở UV seam. Ô <span class="mono">UVchannel</span> bên cạnh
-            quyết định xét map channel nào.</p></div>
-          <div class="def"><b>Open Edges</b><p>Left-click để preview open edge: viewport chuyển sang clay shading,
-            open edge sáng xanh nhưng chưa select gì. Left-click lần nữa để tắt.
-            Right-click mới select thật các edge đó.</p></div>
+          <div class="def"><b>Element</b><p>Lan ra theo Element của face đang chọn</p>
+          </div>
+          <div class="def"><b>Material</b><p>Lan ra theo ID của face đang chọn&nbsp;</p>
+          </div>
+          <div class="def"><b>Smoothgroup</b><p>Lan ra theo Smoothgroup của face đang chọn</p>
+          </div>
+          <div class="def"><b>UV Island</b><p>Lan ra theo mảng UV của face đang chọn&nbsp;</p>
+          </div>
+          <div class="def"><b>Open Edges</b><p>Chụt trái show cạnh hở,bấm nữa để tắt. Chụt phải select cạnh hở.&nbsp; &nbsp; &nbsp;&nbsp;</p>
+          </div>
         </div>
-              </div>
+      </div>
     </div>
   </div>
 
   <div class="sign">
-    <span>Hướng dẫn cho tool lamti_tools.ms</span>
-    <span>from A.I - hen xui</span>
+    <span>Hướng dẫn cho lamti_tools.ms</span>
+    <span>tools from A.I nên hên xui nhé!</span>
   </div>
 
 </div>
