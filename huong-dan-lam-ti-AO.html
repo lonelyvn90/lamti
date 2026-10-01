@@ -2,538 +2,808 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<title>lam` ti' — bộ hướng dẫn 2 trang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>làm tí tools – hướng dẫn sử dụng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --field:#16191b;
-  --field-2:#1d2124;
-  --rule:#33393d;
-  --max-panel:#5a5f62;
-  --max-group:#4d5254;
-  --max-btn:#6e7376;
-  --paper:#e9ecec;
-  --dim:#9aa3a6;
-  --blue:#3270c8;
-  --nmap:#8080ff;
-  --orange:#e8a33d;
-  --green:#3fbf5f;
-  --wire:#00e14a;
-  --dark-panel:#2e2e2e;
-  --dark-grp:#383838;
-  --dark-btn:#4a4a4a;
+  --bg:#2e3135; --surface:#383c41; --surface2:#43474d; --rule:#51565d;
+  --text:#e8e6e1; --muted:#a9adb3; --hi:#5d93e6;
+  --sans:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+  --mx:"Segoe UI",Tahoma,Arial,sans-serif;
+  --mx-bg:#444; --mx-title:#2f2f2f; --mx-btn:#5a5a5a; --mx-text:#dcdcdc; --mx-line:#5e5e5e;
+  --ease:cubic-bezier(.2,.75,.2,1);
+  --accent:#e8e6e1;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:#0d0f10}
-body{font-family:"IBM Plex Sans",-apple-system,Segoe UI,Roboto,sans-serif;
-  color:#e9ecec;display:flex;flex-direction:column;align-items:center;gap:26px;padding:28px 16px}
-.poster.sheet-ao{width:1240px;background:var(--field);
-  border:1px solid var(--rule);
-  padding:46px 48px 40px;}
-.sheet-ao mono, .sheet-ao .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
-.sheet-ao /* ---------- head ---------- */
-.head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;
-  border-bottom:3px solid var(--blue);padding-bottom:18px}
-.sheet-ao h1{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:82px;
-  line-height:.84;letter-spacing:-.01em}
-.sheet-ao h1 .q{color:var(--blue)}
-.sheet-ao .tag{font-size:15.5px;color:var(--dim);margin-top:12px;max-width:62ch;line-height:1.5}
-.sheet-ao .meta{text-align:right;font-size:12.5px;color:var(--dim);line-height:1.7}
-.sheet-ao .meta b{color:var(--paper);font-weight:600}
-.sheet-ao .swatches{display:flex;gap:5px;justify-content:flex-end;margin-top:9px}
-.sheet-ao .swatches i{width:26px;height:6px;display:block}
-.sheet-ao /* ---------- grid ---------- */
-.main{display:grid;grid-template-columns:300px 1fr;gap:34px;margin-top:30px}
-.sheet-ao h2{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:27px;
-  letter-spacing:.01em;margin-bottom:12px}
-.sheet-ao h2 small{font-family:"IBM Plex Sans";font-size:12.5px;color:var(--dim);font-weight:400;margin-left:8px}
-.sheet-ao /* ---------- panel replica ---------- */
-.panel{background:var(--max-panel);border:1px solid #3c4042;padding:0 0 9px;
-  box-shadow:0 14px 34px rgba(0,0,0,.5);position:sticky;top:20px}
-.sheet-ao .titlebar{background:#2e7d32;display:flex;align-items:center;gap:7px;padding:5px 6px;
-  font-size:12.5px;font-weight:600;color:#fff}
-.sheet-ao .titlebar .ico{width:15px;height:15px;background:#2b6fd0;border:1px solid #123;flex:none}
-.sheet-ao .titlebar .x{margin-left:auto;background:#c0392b;width:17px;height:15px;text-align:center;
-  line-height:15px;font-size:11px}
-.sheet-ao .pbody{padding:8px 9px}
-.sheet-ao .btn{background:var(--max-btn);border:1px solid #43484a;border-top-color:#878c8e;
-  color:#f0f2f2;font-size:11px;text-align:center;padding:5px 2px;line-height:1.1}
-.sheet-ao .btn.tall{padding:8px 2px}
-.sheet-ao .row2{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:5px}
-.sheet-ao .grp{border:1px solid #44494b;margin:10px 0 0;padding:13px 9px 10px;position:relative}
-.sheet-ao .grp>.lbl{position:absolute;top:-8px;left:7px;background:var(--max-panel);padding:0 5px;
-  font-size:10.5px;color:#dfe3e3}
-.sheet-ao .num{position:absolute;top:-11px;right:-11px;width:22px;height:22px;border-radius:50%;
-  background:var(--wire);color:#06210f;font-weight:700;font-size:12px;
-  display:flex;align-items:center;justify-content:center;font-family:"Barlow Condensed",sans-serif}
-.sheet-ao .sub{font-size:10.5px;color:#e2e6e6;margin:7px 0 4px}
-.sheet-ao .field{background:#6c7174;border:1px solid #43484a;height:19px;margin-bottom:5px}
-.sheet-ao .chk{font-size:10.5px;color:#eceeee;display:flex;align-items:center;gap:5px;margin-bottom:5px}
-.sheet-ao .chk i{width:11px;height:11px;background:#7c8184;border:1px solid #3c4042;display:block;flex:none}
-.sheet-ao .dd{display:flex;align-items:center;gap:6px;font-size:10.5px;margin-bottom:6px}
-.sheet-ao .dd .box{flex:1;background:#6c7174;border:1px solid #43484a;height:19px}
-.sheet-ao .sw{display:flex;gap:6px;font-size:10.5px;align-items:center;margin-bottom:2px}
-.sheet-ao .sw span{display:flex;align-items:center;gap:4px;flex:1}
-.sheet-ao .sw i{flex:1;height:14px;border:1px solid #2f3335;display:block}
-.sheet-ao .big{color:#fff;font-weight:700;font-size:12.5px;text-align:center;padding:7px;border:2px solid rgba(0,0,0,.35)}
-.sheet-ao .foot{font-size:10px;color:#dfe3e3;padding:7px 3px 0}
-.sheet-ao /* ---------- callouts ---------- */
-.calls{display:grid;gap:9px}
-.sheet-ao .call{display:grid;grid-template-columns:24px 1fr;gap:11px;align-items:start;
-  border-left:2px solid var(--rule);padding:7px 0 7px 12px}
-.sheet-ao .call b{width:22px;height:22px;border-radius:50%;background:var(--wire);color:#06210f;
-  display:flex;align-items:center;justify-content:center;font-size:12px;
-  font-family:"Barlow Condensed",sans-serif;font-weight:700}
-.sheet-ao .call h3{font-size:14.5px;font-weight:600;margin-bottom:2px}
-.sheet-ao .call p{font-size:12.8px;color:#c2c9cb;line-height:1.45}
-.sheet-ao /* ---------- group explain ---------- */
-.gsec{margin-bottom:20px}
-.sheet-ao .ghead{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-.sheet-ao .ghead b{width:22px;height:22px;border-radius:50%;background:var(--wire);color:#06210f;
-  display:flex;align-items:center;justify-content:center;font-size:12px;
-  font-family:"Barlow Condensed",sans-serif;font-weight:700;flex:none}
-.sheet-ao .ghead h3{font-size:17px;font-weight:600}
-.sheet-ao .gsec>p.lead{font-size:12.9px;color:#c2c9cb;line-height:1.45;margin-bottom:9px}
-.sheet-ao .defs{display:grid;gap:7px;margin-top:9px}
-.sheet-ao .def{display:grid;grid-template-columns:146px 1fr;gap:13px;align-items:start;
-  padding-bottom:7px;border-bottom:1px solid #24292b}
-.sheet-ao .def:last-child{border-bottom:0}
-.sheet-ao .def b{font-size:12.6px;font-weight:600;font-family:"IBM Plex Mono",monospace}
-.sheet-ao .def p{font-size:12.7px;color:#c2c9cb;line-height:1.45}
-.sheet-ao /* ---------- workflow ---------- */
-.flow{margin-top:26px;border-top:1px solid var(--rule);padding-top:22px}
-.sheet-ao .step{display:grid;grid-template-columns:54px 1fr;gap:14px;padding:13px 0;
-  border-bottom:1px dashed var(--rule)}
-.sheet-ao .step:last-child{border-bottom:0}
-.sheet-ao .step .k{font-family:"Barlow Condensed",sans-serif;font-size:40px;line-height:.8;
-  color:var(--blue);font-weight:700}
-.sheet-ao .step h3{font-size:16px;font-weight:600;margin-bottom:5px}
-.sheet-ao .step p{font-size:13px;color:#c2c9cb;line-height:1.5}
-.sheet-ao .step p+p{margin-top:5px}
-.sheet-ao .pill{display:inline-block;font-size:11px;padding:1px 7px;border:1px solid var(--rule);
-  color:#dfe4e5;margin-right:5px}
-.sheet-ao .ask{border-left:2px solid var(--orange);padding-left:11px;margin-top:7px;
-  font-size:12.4px;color:#e5d7be;line-height:1.45}
-.sheet-ao .ask b{color:var(--orange);font-weight:600}
-.sheet-ao /* ---------- bottom ---------- */
-.bottom{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:32px;
-  border-top:3px solid var(--blue);padding-top:22px}
-.sheet-ao table{width:100%;border-collapse:collapse;font-size:12.6px}
-.sheet-ao td{padding:5.5px 0;border-bottom:1px solid #24292b;vertical-align:top}
-.sheet-ao td:first-child{color:var(--dim);width:44%}
-.sheet-ao td:last-child{font-family:"IBM Plex Mono",monospace;font-size:12px}
-.sheet-ao .warn{display:grid;gap:9px}
-.sheet-ao .warn div{font-size:12.7px;line-height:1.45;color:#c8cfd1;padding-left:15px;position:relative}
-.sheet-ao .warn div:before{content:"";position:absolute;left:0;top:6px;width:7px;height:7px;
-  background:var(--orange)}
-.sheet-ao .warn b{color:#fff;font-weight:600}
-.sheet-ao .sign{margin-top:26px;padding-top:13px;border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim)}
-.poster.sheet-tools{width:1240px;background:var(--field);border:1px solid var(--rule);padding:46px 48px 40px}
-.sheet-tools .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
-.sheet-tools .head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;
-  border-bottom:3px solid var(--nmap);padding-bottom:18px}
-.sheet-tools h1{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:76px;line-height:.85;letter-spacing:-.01em}
-.sheet-tools h1 .a{color:var(--nmap)}
-.sheet-tools h1 .b{color:var(--orange)}
-.sheet-tools h1 .c{color:var(--green)}
-.sheet-tools .tag{font-size:15.5px;color:var(--dim);margin-top:12px;max-width:64ch;line-height:1.5}
-.sheet-tools .meta{text-align:right;font-size:12.5px;color:var(--dim);line-height:1.7}
-.sheet-tools .meta b{color:var(--paper);font-weight:600}
-.sheet-tools h2{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:28px;margin-bottom:13px}
-.sheet-tools h2 small{font-family:"IBM Plex Sans";font-size:12.5px;color:var(--dim);font-weight:400;margin-left:8px}
-.sheet-tools .band{margin-top:30px;padding-top:22px;border-top:1px solid var(--rule)}
-.sheet-tools .band.big{border-top:3px solid var(--orange)}
-.sheet-tools .band.sel{border-top:3px solid var(--green)}
-.sheet-tools /* panel replicas */
-.panel{background:var(--dark-panel);border:1px solid #1a1a1a;box-shadow:0 12px 30px rgba(0,0,0,.5)}
-.sheet-tools .tbar{display:flex;align-items:center;gap:7px;padding:5px 6px;font-size:12px;font-weight:600;color:#fff}
-.sheet-tools .tbar .ico{width:14px;height:14px;background:#2b6fd0;flex:none}
-.sheet-tools .tbar .x{margin-left:auto;font-size:12px}
-.sheet-tools .pb{padding:9px}
-.sheet-tools .grp{border:1px solid #4a4a4a;margin-bottom:9px;padding:14px 8px 9px;position:relative}
-.sheet-tools .grp>.lbl{position:absolute;top:-8px;left:8px;background:var(--dark-panel);padding:0 5px;font-size:10.5px;color:#dcdcdc}
-.sheet-tools .btn{background:var(--dark-btn);border:1px solid #5c5c5c;color:#eee;font-size:10.5px;
-  text-align:center;padding:4px 2px;line-height:1.15}
-.sheet-tools .r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:4px}
-.sheet-tools .r2{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:4px}
-.sheet-tools .listbox{background:#1f1f1f;border:1px solid #5c5c5c;height:62px;margin-bottom:6px}
-.sheet-tools .tiny{font-size:10px;color:#b9b9b9;margin-bottom:3px}
-.sheet-tools .fld{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#dcdcdc;margin-bottom:5px}
-.sheet-tools .fld .in{background:#3f3f3f;border:1px solid #5c5c5c;height:17px;flex:1}
-.sheet-tools .fld .in.w{flex:none;width:46px}
-.sheet-tools .dis{color:#777}
-.sheet-tools .chk{font-size:10.5px;color:#dcdcdc;display:flex;align-items:center;gap:5px;margin-bottom:5px}
-.sheet-tools .chk i{width:11px;height:11px;background:#3f3f3f;border:1px solid #5c5c5c;flex:none}
-.sheet-tools .bar{background:#1f1f1f;border:1px solid #5c5c5c;height:13px;margin-bottom:4px}
-.sheet-tools /* text blocks */
-.two{display:grid;grid-template-columns:262px 1fr;gap:30px;align-items:start}
-.sheet-tools .three{display:grid;grid-template-columns:262px 262px 1fr;gap:26px;align-items:start}
-.sheet-tools .step{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:11px 0;border-bottom:1px dashed var(--rule)}
-.sheet-tools .step:last-child{border-bottom:0}
-.sheet-tools .step .k{font-family:"Barlow Condensed",sans-serif;font-size:36px;line-height:.8;font-weight:700;color:var(--nmap)}
-.sheet-tools .band.sel .step .k{color:var(--green)}
-.sheet-tools .step h3{font-size:15.5px;font-weight:600;margin-bottom:4px}
-.sheet-tools .step p{font-size:13px;color:#c2c9cb;line-height:1.5}
-.sheet-tools .step p+p{margin-top:4px}
-.sheet-tools .note{border-left:2px solid var(--orange);padding-left:11px;margin-top:6px;font-size:12.4px;
-  color:#e5d7be;line-height:1.45}
-.sheet-tools .defs{display:grid;gap:10px}
-.sheet-tools .def{display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:start;
-  padding-bottom:9px;border-bottom:1px solid #24292b}
-.sheet-tools .def:last-child{border-bottom:0}
-.sheet-tools .def b{font-size:13.5px;font-weight:600}
-.sheet-tools .def p{font-size:12.9px;color:#c2c9cb;line-height:1.45}
-.sheet-tools table{width:100%;border-collapse:collapse;font-size:12.6px}
-.sheet-tools th{text-align:left;font-size:12px;color:var(--dim);font-weight:500;padding:0 0 6px;border-bottom:1px solid var(--rule)}
-.sheet-tools td{padding:6px 0;border-bottom:1px solid #24292b;vertical-align:top}
-.sheet-tools td:first-child{color:var(--dim);width:34%}
-.sheet-tools .warn{display:grid;gap:9px;margin-top:4px}
-.sheet-tools .warn div{font-size:12.7px;line-height:1.45;color:#c8cfd1;padding-left:15px;position:relative}
-.sheet-tools .warn div:before{content:"";position:absolute;left:0;top:6px;width:7px;height:7px;background:var(--orange)}
-.sheet-tools .warn b{color:#fff;font-weight:600}
-.sheet-tools .cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:26px;
-  border-top:3px solid var(--nmap);padding-top:22px}
-.sheet-tools .sign{margin-top:26px;padding-top:13px;border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim)}
-@media print{
-  @page{size:A3 portrait;margin:0}
-  html,body{background:#fff;padding:0;gap:0;display:block}
-  .poster.sheet-ao{width:297mm;border:0;padding:14mm 14mm 10mm;transform-origin:top left}
-.sheet-ao .panel{position:static;box-shadow:none}
-  .poster.sheet-tools{width:297mm;border:0;padding:13mm 13mm 9mm}
-.sheet-tools .panel{box-shadow:none}
-  .poster.sheet-tools{break-before:page;page-break-before:always}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:#8fc1ff}
+:focus-visible{outline:2px solid #fff;outline-offset:2px}
+code{font-family:var(--mono);font-size:.86em;background:var(--surface2);padding:.1em .38em;border-radius:3px;white-space:nowrap}
+kbd{font-family:var(--sans);font-size:.85em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 .4em;background:var(--surface)}
+
+#progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--accent);z-index:100;transition:background-color .5s var(--ease)}
+
+/* ---------- hero ---------- */
+header.hero{max-width:1260px;margin:0 auto;padding:56px 24px 40px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center}
+.hero h1{font-weight:800;font-size:clamp(2.6rem,6.4vw,4.6rem);line-height:.98;letter-spacing:-.03em;margin:0 0 18px}
+.hero h1 .bars{display:inline-flex;align-items:flex-end;gap:.11em;margin-left:.28em;height:.66em;vertical-align:baseline}
+.hero h1 .bars a{display:block;width:.2em;height:100%;background:var(--c);border-radius:2px;transform-origin:50% 100%;
+  transition:transform .35s var(--ease),filter .2s}
+.hero h1 .bars a:hover{transform:scaleY(1.25);filter:brightness(1.15)}
+.boot .hero h1 .bars a{animation:rise .7s var(--ease) both}
+.boot .hero h1 .bars a:nth-child(1){animation-delay:.1s}.boot .hero h1 .bars a:nth-child(2){animation-delay:.17s}.boot .hero h1 .bars a:nth-child(3){animation-delay:.24s}
+.boot .hero h1 .bars a:nth-child(4){animation-delay:.31s}.boot .hero h1 .bars a:nth-child(5){animation-delay:.38s}.boot .hero h1 .bars a:nth-child(6){animation-delay:.45s}
+@keyframes rise{from{transform:scaleY(0);opacity:0}to{transform:none;opacity:1}}
+.hero p{max-width:56ch;color:var(--muted);margin:0 0 14px;font-size:1.06rem}
+.hero .ver{font-size:.92rem}
+.hero .ver b{color:var(--text);font-weight:500}
+
+.launcher{width:256px;background:var(--mx-bg);border:1px solid #222;box-shadow:0 18px 40px rgba(0,0,0,.45);font:12px/1.3 var(--mx);color:var(--mx-text)}
+.launcher .bd{padding:8px 0 6px}
+.lb{display:flex;align-items:center;justify-content:center;width:218px;height:34px;margin:6px auto;font:700 14px Arial,sans-serif;border:2px solid;color:#000;text-decoration:none;
+  transition:background-color .18s,transform .22s var(--ease),box-shadow .3s var(--ease)}
+.lb:hover{transform:translateX(4px);box-shadow:-5px 0 0 0 rgba(255,255,255,.2)}
+.lb:active{transform:translateX(4px) scale(.97)}
+.lb.ao{background:#326ec8;border-color:#143c8c;color:#fff}.lb.ao:hover{background:#5a96e6}.lb.ao:active{background:#1e5aaa}
+.lb.nm{background:#8080ff;border-color:#5050c8}.lb.nm:hover{background:#a0a0ff}.lb.nm:active{background:#6464d7}
+.lb.col{background:#ffc83c;border-color:#ff8c00}.lb.col:hover{background:#ffdc78}.lb.col:active{background:#e6aa28}
+.lb.sel{background:#46be5f;border-color:#146e32}.lb.sel:hover{background:#64d778}.lb.sel:active{background:#288c46}
+.lb.id{background:#aa6ed7;border-color:#64288c}.lb.id:hover{background:#c896eb}.lb.id:active{background:#8246af}
+.lb.vx{background:#3cbebe;border-color:#146e6e}.lb.vx:hover{background:#6edcdc}.lb.vx:active{background:#289696}
+.launcher .foot{margin:10px 18px 2px;color:#32dcfa;text-decoration:underline}
+.launcher .v{margin:0 18px 6px;color:#cfcfcf}
+.tb{height:24px;background:var(--mx-title);display:flex;align-items:center;justify-content:space-between;padding:0 8px;color:#e6e6e6;font:11px/1 var(--mx)}
+.tb b{font-weight:600}
+.tb .x{color:#aaa}
+
+/* the one orchestrated load moment: launcher lifts in, buttons slot in one by one */
+.boot .launcher{animation:lift .8s var(--ease) both}
+.boot .lb{animation:slot .6s var(--ease) both}
+.boot .lb:nth-child(1){animation-delay:.28s}.boot .lb:nth-child(2){animation-delay:.35s}.boot .lb:nth-child(3){animation-delay:.42s}
+.boot .lb:nth-child(4){animation-delay:.49s}.boot .lb:nth-child(5){animation-delay:.56s}.boot .lb:nth-child(6){animation-delay:.63s}
+@keyframes lift{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes slot{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+
+/* ---------- layout ---------- */
+.docs{max-width:1260px;margin:0 auto;padding:12px 24px 90px;display:grid;grid-template-columns:420px 1fr;gap:56px}
+aside.side{position:sticky;top:18px;align-self:start;height:calc(100vh - 36px);display:flex;flex-direction:column;gap:12px}
+.tabs{display:flex;gap:6px}
+.tabs a{flex:1;height:30px;border:2px solid;display:flex;align-items:center;justify-content:center;font:700 11px Arial,sans-serif;color:#000;text-decoration:none;opacity:.45;
+  transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.tabs a:hover{opacity:.85}
+.tabs a.cur{opacity:1;transform:translateY(-3px)}
+.tabs a.gen{background:transparent;border-color:var(--rule);color:var(--text)}
+.tabs a.ao{background:#326ec8;border-color:#143c8c;color:#fff}.tabs a.nm{background:#8080ff;border-color:#5050c8}
+.tabs a.col{background:#ffc83c;border-color:#ff8c00}.tabs a.sel{background:#46be5f;border-color:#146e32}
+.tabs a.id{background:#aa6ed7;border-color:#64288c}.tabs a.vx{background:#3cbebe;border-color:#146e6e}
+
+.win{position:relative;align-self:flex-start;background:var(--mx-bg);border:1px solid #222;box-shadow:0 10px 30px rgba(0,0,0,.4);
+  display:flex;flex-direction:column;overflow:hidden;width:214px;height:294px;
+  transition:width .55s var(--ease),height .55s var(--ease)}
+.win .tb{flex:none;position:relative}
+.win .tb::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transition:background-color .5s var(--ease)}
+.scroller{position:relative;flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#666 #3a3a3a}
+.stack{position:relative;transition:height .55s var(--ease)}
+.stack>.panel{position:absolute;left:0;top:8px;opacity:0;visibility:hidden;transform:translateY(12px);filter:blur(3px);
+  transition:opacity .3s var(--ease),transform .4s var(--ease),filter .3s var(--ease),visibility 0s .4s}
+.stack>.panel.show{opacity:1;visibility:visible;transform:none;filter:none;
+  transition:opacity .5s var(--ease) .12s,transform .6s var(--ease) .12s,filter .5s var(--ease) .12s,visibility 0s}
+.hint{font-size:.85rem;color:var(--muted);margin:0;max-width:380px}
+
+/* ---------- panel replica ---------- */
+.panel{position:relative;background:var(--mx-bg);font:11px/1.3 var(--mx);color:var(--mx-text)}
+.panel .it{position:absolute;display:flex;align-items:center;white-space:nowrap;color:inherit;text-decoration:none;
+  transition:opacity .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease),transform .16s var(--ease),background-color .15s}
+.panel .g{border:1px solid var(--mx-line);border-radius:2px;pointer-events:none}
+.panel .g>span{position:absolute;top:-8px;left:6px;background:var(--mx-bg);padding:0 3px;max-width:calc(100% - 12px);overflow:hidden;text-overflow:ellipsis}
+.panel .b{justify-content:center;background:var(--mx-btn);border:1px solid #6b6b6b;border-radius:2px;color:#eee;overflow:hidden}
+.panel a.it{cursor:pointer}
+.panel a.b:hover{background:#6c6c6c}
+.panel a.it:hover{z-index:2}
+.panel a.it:active{transform:scale(.95)}
+.panel .e{background:#2e2e2e;border:1px solid #666;padding:0 4px;color:#bbb;overflow:hidden}
+.panel .d{background:#3a3a3a;border:1px solid #666;padding:0 4px;justify-content:space-between}
+.panel .d::after{content:"▾"}
+.panel .k::before{content:"";width:11px;height:11px;border:1px solid #888;background:#2e2e2e;margin-right:5px;flex:none}
+.panel .k.on::before{background:#2e2e2e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 11'%3E%3Cpath d='M2 5.5 L4.5 8 L9 2.5' stroke='%23ddd' stroke-width='1.8' fill='none'/%3E%3C/svg%3E") center/11px no-repeat}
+.panel .k.off{color:#888}
+.panel .s i{display:inline-block;width:40px;height:14px;border:1px solid #222;margin-left:6px}
+.panel .sp span.f{background:#2e2e2e;border:1px solid #666;padding:0 4px;min-width:38px;height:17px;display:inline-flex;align-items:center}
+.panel .sp span.f::after{content:"⬍";margin-left:auto;padding-left:4px;color:#999;font-size:9px}
+.panel .ls{background:#2e2e2e;border:1px solid #666;flex-direction:column;align-items:stretch;padding:2px 3px}
+.panel .ls div{padding:1px 2px}
+.panel .ls div.sel{background:#3399ff;color:#fff}
+.panel .pb{background:#2b2b2b;border:1px solid #666;align-items:stretch}
+.panel .pb i{display:block;width:62%;background:#50aa50}
+.panel .tbl{background:#fff;color:#111;align-items:flex-start;border:1px solid #888;overflow:hidden}
+.panel .tbl table{border-collapse:collapse;width:100%;font-size:11px}
+.panel .tbl th{background:#eee;font-weight:400;text-align:left;border:1px solid #ccc;padding:2px 4px}
+.panel .tbl td{border:1px solid #ddd;padding:2px 4px}
+.panel .tbl tr.hl td{background:#3399ff;color:#fff}
+.panel .tbl td.ok{background:#c8f5c8}.panel .tbl td.over{background:#ffc8c8}.panel .tbl td.a{background:#b4d7ff}.panel .tbl td.bb{background:#ffeeaa}
+.panel .cd{display:inline-block;width:12px;height:12px;border:1px solid #555;vertical-align:-2px}
+.panel .rb::before{content:"◉\00a0"}
+.panel .ck{justify-content:center;background:#46a050;border:1px solid #6b6b6b;border-radius:2px;color:#fff}
+.panel .lk{text-decoration:underline}
+/* focus mode: everything unrelated to the section being read steps back */
+.panel.focus .it{opacity:.3}
+.panel.focus .it.hit{opacity:1}
+.panel.focus .g.hit{border-color:var(--hi);box-shadow:0 0 0 1px var(--hi),0 0 20px rgba(93,147,230,.35)}
+.panel.focus .it.hit:not(.g):not(.l):not(.lk){box-shadow:0 0 0 1px var(--hi)}
+
+#tip{position:fixed;z-index:120;max-width:260px;background:#15171a;color:#fff;font:500 12.5px/1.45 var(--sans);padding:7px 10px;border-radius:5px;pointer-events:none;
+  opacity:0;transform:translateY(4px);transition:opacity .18s var(--ease),transform .18s var(--ease)}
+#tip.on{opacity:1;transform:none}
+
+/* ---------- content ---------- */
+main{min-width:0;max-width:740px}
+section.tool{margin:0 0 90px;scroll-margin-top:18px}
+.th{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 6px}
+.th h2{margin:0}
+h2{font-weight:800;font-size:2.15rem;line-height:1.12;letter-spacing:-.015em;margin:0 0 14px}
+.chip{display:inline-flex;align-items:center;justify-content:center;height:30px;padding:0 16px;font:700 13px Arial,sans-serif;border:2px solid;color:#000;flex:none}
+.chip.ao{background:#326ec8;border-color:#143c8c;color:#fff}.chip.nm{background:#8080ff;border-color:#5050c8}.chip.col{background:#ffc83c;border-color:#ff8c00}
+.chip.sel{background:#46be5f;border-color:#146e32}.chip.id{background:#aa6ed7;border-color:#64288c}.chip.vx{background:#3cbebe;border-color:#146e6e}
+.lead{color:var(--muted);font-size:1.04rem;margin:8px 0 22px;max-width:66ch}
+.sub{position:relative;padding:4px 0 2px;margin:0 0 24px;scroll-margin-top:24px;border-radius:4px}
+.sub::before{content:"";position:absolute;left:-22px;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--accent);opacity:0;transform:scaleY(.2);transform-origin:top;
+  transition:opacity .45s var(--ease),transform .6s var(--ease),background-color .5s var(--ease)}
+.sub.cur::before{opacity:1;transform:none}
+.sub.flash{animation:flash 1.2s var(--ease)}
+@keyframes flash{0%{background:rgba(93,147,230,.2);box-shadow:0 0 0 10px rgba(93,147,230,.2)}100%{background:transparent;box-shadow:0 0 0 10px transparent}}
+h3{font-weight:700;font-size:1.2rem;margin:0 0 8px;padding-top:6px}
+p{margin:0 0 14px;max-width:70ch}
+ul,ol{margin:0 0 16px;padding-left:1.3em;max-width:70ch}
+li{margin:5px 0}
+.btnref{display:inline-block;font:500 .82em/1.6 var(--mx);background:var(--mx-btn);border:1px solid #6b6b6b;border-radius:2px;color:#eee;padding:0 .55em;white-space:nowrap}
+.note{background:var(--surface);border-left:3px solid var(--hi);padding:12px 16px;margin:16px 0;border-radius:0 4px 4px 0;max-width:70ch}
+.note.warn{border-left-color:#e0a030}
+.note p:last-child{margin:0}
+.tw{overflow-x:auto;margin:10px 0 18px}
+table.doc{border-collapse:collapse;min-width:100%;font-size:.93rem}
+table.doc th{text-align:left;font-weight:700;border-bottom:2px solid var(--rule);padding:7px 14px 7px 0}
+table.doc td{border-bottom:1px solid var(--rule);padding:7px 14px 7px 0;vertical-align:top}
+ol.flow{counter-reset:f;list-style:none;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 18px 46px;margin:0 0 0 15px;border-left:2px solid var(--rule)}
+ol.flow>li:last-child{border-left-color:transparent}
+ol.flow>li::before{content:counter(f);position:absolute;left:-16px;top:-2px;width:30px;height:30px;border-radius:50%;background:var(--surface2);border:2px solid var(--accent);color:var(--text);font-weight:700;display:grid;place-items:center;font-size:.9rem;transition:border-color .5s var(--ease)}
+ol.flow b{display:block}
+.mob{display:none}
+footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top:1px solid var(--rule);font-size:.9rem}
+
+@media (max-width:1100px){
+  .docs{grid-template-columns:1fr}
+  aside.side{display:none}
+  .mob{display:block;overflow-x:auto;margin:6px 0 24px}
+  .mob .mwin{display:inline-block;background:var(--mx-bg);padding-bottom:4px;border:1px solid #222;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+  .sub::before{left:-12px}
+}
+@media (max-width:760px){
+  header.hero{grid-template-columns:1fr;gap:28px}
+  .launcher{justify-self:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
-<body>
-<div class="poster sheet-ao">
+<body class="boot">
+<div id="progress"></div>
+<div id="tip" role="tooltip"></div>
 
-  <header class="head">
-    <div>
-      <h1><span class="q">lam` ti'</span> AO</h1>
-      <p class="tag">Render Dilation - Setup scene bake AO&nbsp;&nbsp;</p>
+<header class="hero">
+  <div>
+    <h1>làm tí tools<span class="bars" aria-hidden="true"><a href="#ao" style="--c:#326ec8"></a><a href="#normal" style="--c:#8080ff"></a><a href="#color" style="--c:#ffc83c"></a><a href="#select" style="--c:#46be5f"></a><a href="#id" style="--c:#aa6ed7"></a><a href="#vertex" style="--c:#3cbebe"></a></span></h1>
+    <p>Không có mô tả.</p>
+    <p>&nbsp;</p>
+    <p class="ver">Phiên bản <b>v1.7</b>, cập nhật 01/10/2026</p>
+  </div>
+  <div class="launcher" aria-label="Danh sách tool">
+    <div class="tb"><b>làm tí tools</b><span class="x">×</span></div>
+    <div class="bd">
+      <a class="lb ao" href="#ao">làm tí AO</a>
+      <a class="lb nm" href="#normal">làm tí Normal</a>
+      <a class="lb col" href="#color">làm tí Color</a>
+      <a class="lb sel" href="#select">làm tí Select</a>
+      <a class="lb id" href="#id">làm tí ID</a>
+      <a class="lb vx" href="#vertex">đếm tí Vertex</a>
+      <div class="foot">Document - tool from A.I nên hên xui</div>
+      <div class="v">Version v1.7  -  01/10/2026</div>
     </div>
-    <div class="meta">
-      <b>lamti_tools.ms</b><br>
-      
-      
-      <div class="swatches">
-        <i style="background:var(--blue)"></i><i style="background:var(--nmap)"></i>
-        <i style="background:var(--orange)"></i><i style="background:var(--green)"></i>
-      </div>
+  </div>
+</header>
+
+<div class="docs">
+  <aside class="side" aria-label="Bảng tool đang xem">
+    <nav class="tabs" aria-label="Chuyển tool">
+      <a class="ao" href="#ao" data-t="ao" title="làm tí AO">AO</a>
+      <a class="nm" href="#normal" data-t="nm" title="làm tí Normal">NM</a>
+      <a class="col" href="#color" data-t="col" title="làm tí Color">COL</a>
+      <a class="sel" href="#select" data-t="sel" title="làm tí Select">SEL</a>
+      <a class="id" href="#id" data-t="id" title="làm tí ID">ID</a>
+      <a class="vx" href="#vertex" data-t="vx" title="đếm tí Vertex">VTX</a>
+      <a class="gen" href="#errors" data-t="gen" title="Khi gặp lỗi">!</a>
+    </nav>
+    <div class="win" id="win">
+      <div class="tb"><b id="winTitle">làm tí tools</b><span class="x">×</span></div>
+      <div class="scroller" id="scroller"><div class="stack" id="stack"></div></div>
     </div>
-  </header>
+    <p class="hint">Rê chuột lên nút để xem tooltip, bấm để đọc phần giải thích.</p>
+  </aside>
 
-  <div class="main">
+  <main>
+    <!-- ================= AO ================= -->
+    <section class="tool" id="ao">
+      <div class="th"><h2>làm tí AO</h2><span class="chip ao">làm tí AO</span></div>
+      <p class="lead">Dùng để: render Dilation, setup và bake AO, chuẩn bị export sang Substance, setup bake LOD.</p>
+      <div class="mob" data-mob="ao"></div>
 
-    <!-- ============ PANEL REPLICA ============ -->
-    <div>
-      <div class="panel">
-        <div class="titlebar"><span class="ico"></span>lam` ti' tools<span class="x">✕</span></div>
-        <div class="pbody">
-          <div class="big" style="background:var(--blue)">lam` ti' AO</div>
-
-          <div class="grp"><span class="lbl">Output</span>
-            <div class="chk"><i></i>Auto Save</div>
-            <div style="display:flex;gap:5px">
-              <div class="field" style="flex:1;margin:0"></div>
-              <div class="btn" style="width:32px">...</div>
-            </div>
-          </div>
-
-          <div class="grp"><span class="lbl">Render Dilation</span>
-            <div class="dd"><span>Size:</span><div class="box"></div></div>
-            <div class="sw">
-              <span>Solid: <i style="background:#7f7f7f"></i></span>
-              <span>Wire: <i style="background:#00ff00"></i></span>
-            </div>
-            <div class="sub">Channel 1</div>
-            <div class="row2"><div class="btn">CarPaint Details</div><div class="btn">Details</div></div>
-            <div class="row2"><div class="btn">Glass</div><div class="btn">LOD</div></div>
-            <div class="sub">Channel 2</div>
-            <div class="row2"><div class="btn">CarPaint</div><div class="btn">Details_NM</div></div>
-            <div class="btn tall">For lazy people</div>
-          </div>
-
-          <div class="grp"><span class="lbl">Setup - Render AO</span>
-            <div class="btn" style="margin-bottom:5px">AO Setup</div>
-            <div class="btn" style="margin-bottom:5px">CARPAINT_attribute_blue</div>
-            <div class="btn" style="margin-bottom:5px">DETAILS_attribute_blue</div>
-            <div class="btn" style="margin-bottom:5px">LOD4</div>
-            <div class="btn">Custom Bake</div>
-          </div>
-
-          <div class="grp"><span class="lbl">Set for Paint &amp; Check</span>
-            <div class="btn tall" style="margin-bottom:6px">Setup export Substance &amp; Check</div>
-            <div style="display:flex;gap:5px;margin-bottom:6px">
-              <div class="btn" style="flex:1">Add PBR Material</div><div class="btn" style="width:32px">...</div>
-            </div>
-            <div style="display:flex;gap:5px;margin-bottom:6px;align-items:center">
-              <div class="chk" style="flex:1;margin:0"><i></i>HDRI Reflections</div>
-              <div class="btn" style="width:32px">...</div>
-            </div>
-            <div style="display:flex;gap:5px;margin-bottom:6px">
-              <div class="btn" style="flex:1">Export FBX for Substance</div><div class="btn" style="width:32px">...</div>
-            </div>
-            <div class="chk"><i></i>Launch Substance Painter</div>
-          </div>
-
-          <div style="margin-top:11px">
-            <div class="big" style="background:var(--nmap);margin-bottom:5px">lam` ti' Normal</div>
-            <div class="big" style="background:var(--orange);margin-bottom:5px">lam` ti' Color</div>
-            <div class="big" style="background:var(--green)">lam` ti' Select</div>
-          </div>
-          <div class="foot">from A.I - hen xui</div>
+      <div class="sub" id="ao-flow" data-tool="ao" data-sec="ao-flow">
+        <h3>Thứ tự làm việc</h3>
+        <p>&nbsp;</p>
+        <ol class="flow">
+          <li><b>Chọn thư mục Output</b>Mọi file render và bake đều lưu vào đây.</li>
+          <li><b>Render Dilation</b>Bấm là render luôn không cần chọn gì (đúng layer là được).</li>
+          <li><b>AO Setup rồi bake AO</b>Bấm Setup trước rồi bấm bake AO sau.</li>
+          <li><b>Setup export Substance</b>Bấm để move/open part rồi xuất fbx sang Substance thôi.</li>
+          <li><b>Setup bake LOD</b>Bấm để Setup và bake maps cho LOD4/5.</li>
+        </ol>
+        <div class="note warn"><p>Các nút Setup đều Undo được (<kbd>Ctrl</kbd>+<kbd>Z</kbd>), mà làm gì làm nhớ save ra file riêng oke?</p>
         </div>
       </div>
-    </div>
 
-    <!-- ============ RIGHT ============ -->
-    <div>
-<div class="step"><div class="k">1</div><div>
-        <h3>Save file trước</h3>
-        <p>Làm gì làm save file cái đã.&nbsp;&nbsp;</p>
-    </div></div>
+      <div class="sub" id="ao-output" data-tool="ao" data-sec="ao-output">
+        <h3>Output</h3>
+        <ul>
+          <li><span class="btnref">Auto Save</span> &nbsp;là Auto Save.</li>
+          <li>Ô đường dẫn hiện đường dẫn.&nbsp; &nbsp;</li>
+          <li><span class="btnref">...*</span> chuột trái để chọn thư mục, chuột phải để mở thư mục.&nbsp; &nbsp;</li>
+        </ul>
+        <p>&nbsp;</p>
+      </div>
 
-      <div class="step"><div class="k">2</div><div>
-        <h3>Set output folder</h3>
-        <p>Chọn đường dẫn save file render. Click chụt phải mở folder.&nbsp; &nbsp; &nbsp;</p>
-      </div></div>
+      <div class="sub" id="ao-dilation" data-tool="ao" data-sec="ao-dilation">
+        <h3>Render Dilation</h3>
+        <p>Render UV của các face có material phù hợp ra hai ảnh: <code>Tên_Dilation.png</code> là khối đặc màu <b>Solid</b>, <code>Tên_Wireframe.png</code> là đường UV màu <b>Wire</b>. Kích thước chọn ở <span class="btnref">Size</span>, từ 512 đến 8192, mặc định 2048.</p>
+        <ul>
+          <li>Chỉ object trong layer tên đúng <code>LOD1</code>, <code>LOD4</code>, <code>LOD5</code> được render.</li>
+          <li>&nbsp;Có thể chọn size và chọn màu nếu muốn.</li>
+        </ul>
+        <div class="tw"><table class="doc">
+          <tr><th>Nút</th><th>UV</th><th>&nbsp;</th><th>Tên file</th></tr>
+          <tr><td><span class="btnref">CarPaint Details</span></td><td>1</td><td>&nbsp;Render ra 2 tấm soild và wireframe của&nbsp;CarPaint_Details &nbsp; &nbsp;&nbsp; </td><td><code>CarPaint_Details</code></td></tr>
+          <tr><td><span class="btnref">Details</span></td><td>1</td><td>Render ra 4 tấm soild và wireframe của&nbsp;Details và&nbsp;Rim</td><td><code>Details</code>, <code>Rim</code></td></tr>
+          <tr><td><span class="btnref">Glass</span></td><td>1</td><td>Render ra 2 tấm soild và wireframe của&nbsp;Glass </td><td><code>Glass</code></td></tr>
+          <tr><td><span class="btnref">LOD</span></td><td>1</td><td>Render ra 2 tấm soild và wireframe của&nbsp;&nbsp;LOD4+5 </td><td><code>LOD</code></td></tr>
+          <tr><td><span class="btnref">CarPaint</span></td><td>2</td><td>Render ra 2 tấm soild và wireframe của&nbsp;CarPaint </td><td><code>CarPaint</code></td></tr>
+          <tr><td><span class="btnref">Details_NM</span></td><td>2</td><td>Render ra 2 tấm soild và wireframe của&nbsp;&nbsp;Details_NM </td><td><code>Details_NM</code></td></tr>
+        </table></div>
+        <p> <span class="btnref">For lazy people</span> &nbsp;là render 6 trong 1.&nbsp; &nbsp; &nbsp; &nbsp;</p>
+      </div>
 
-      <div class="step"><div class="k">3</div><div>
-        <h3>Render Dilation </h3>
-        <p>Quét chọn hết xe&nbsp; bấm render từng tấm hoặc "For lazy people" để render tất cả dilation.&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
-        <div class="defs"> </div>
-      </div></div>
+      <div class="sub" id="ao-setup" data-tool="ao" data-sec="ao-setup">
+        <h3>AO Setup</h3>
+        <p>Bấm để Setup sẵn scene  bake AO (điều kiện là file UV client đã approved).&nbsp;</p>
+</div>
 
-      <div class="step"><div class="k">4</div><div>
-        <h3>AO Setup </h3>
-        <p>Bấm AO Setup để tự open part.</p>
-<div class="ask"><b>Tool hỏi:</b> caliper trước và sau có khác nhau không?
-  có thì bấm Yes,không thì bấm No.</div>
-      </div></div>
-
-      <div class="step"><div class="k">5</div><div>
+      <div class="sub" id="ao-bake" data-tool="ao" data-sec="ao-bake">
         <h3>Bake AO</h3>
-<div class="ask"><b>Tool hỏi:</b> có test render không?
-  Yes thì render 512,No thì render 2048.</div>
-        <div class="defs">
-          <div class="def"><b>CARPAINT<br>DETAILS<br>LOD4</b><p>Render tấm nào thì bấm nút theo tên.&nbsp;</p>
-          </div>
-          <div class="def"><b>Custom Bake</b><p>Bake selection.</p>
-          </div>
-        </div>
-      </div></div>
-
-      <div class="step"><div class="k">6</div><div>
-        <h3>Setup export Substance &amp; Check&nbsp; &nbsp;&nbsp; </h3>
-<div class="defs">
-  <div class="def"><b>Setup export<br>Substance &amp; Check</b><p>Open part để export fbx sang substance.&nbsp;</p>
-  </div>
-          <div class="def"><b>Add PBR Material</b><p>Tạo chất liệu để check trong 3dsmax trước khi vào Engine (dẫn đường dẫn chứa maps đúng tên sẽ tự nhận)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
-          </div>
-          <div class="def"><b>HDRI Reflections</b><p>Thích thì bật HDRI làm chút màu mè.&nbsp;</p>
-          </div>
-          <div class="def"><b>Export FBX<br>for Substance</b><p>Chỉ là xuất ra fbx.&nbsp;</p>
-          </div>
-          <div class="def"><b>Launch Substance<br>Painter</b><p>Lười chưa bật substance thì tick vào nó tự bật lên sau khi xuất fbx thôi.</p>
-          </div>
-      </div>
-      </div></div>
-
-    </div>
-  </div>
-
-  <div class="bottom" style="grid-template-columns:1fr">
-    <div style="max-width:620px">
-      <h2>Thông số bake AO </h2>
-      <table>
-        <tr><td>Renderer</td><td>Arnold</td></tr>
-        <tr><td>Map type</td><td>Ambient Occlusion</td></tr>
-        <tr><td>Projection</td><td>Self</td></tr>
-        <tr><td>UV Channel</td><td>1</td></tr>
-        <tr><td>Resolution</td><td>2048, test&nbsp; 512</td></tr>
-        <tr><td>Padding</td><td>8 px</td></tr>
-        <tr><td>Format</td><td>PNG</td></tr>
-        <tr><td>Output To</td><td>Original Material</td></tr>
-        <tr><td>Samples</td><td>128, test  64</td></tr>
-        <tr><td>Spread / Falloff</td><td>1.0 / 0.001</td></tr>
-        <tr><td>Output path</td><td>folder bro chọn</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="sign">
-    <span>Hướng dẫn cho  lamti_tools.ms</span>
-    <span>tools from A.I nên hên xui nhé!</span>
-  </div>
-
-</div>
-<div class="poster sheet-tools">
-
-  <header class="head">
-    <div>
-      <h1><span class="a">lam` ti' Normal</span> · <span class="b">Color</span> · <span class="c">Select</span></h1>
-</div>
-    <div class="meta">
-      <b>lamti_tools.ms</b><br>
-      
-    </div>
-  </header>
-
-  <!-- ================= NORMAL + COLOR ================= -->
-  <div class="band big">
-    <h2>Normal và Color <small>là bake    normal và color thôi.</small></h2>
-
-    <div class="three">
-
-      <!-- Normal panel -->
-      <div class="panel">
-        <div class="tbar" style="background:#2e7d32"><span class="ico"></span>lam` ti' Normal<span class="x">✕</span></div>
-        <div class="pb">
-          <div class="grp"><span class="lbl">High / Low Poly Pairs</span>
-            <div class="tiny">Pairs:</div>
-            <div class="listbox"></div>
-            <div class="r3"><div class="btn">Pick High Poly</div><div class="btn">Pick Low Poly</div><div class="btn">Add Pair &gt;&gt;</div></div>
-            <div class="r2"><div class="btn">Remove Selected</div><div class="btn">Clear All</div></div>
-            <div class="tiny" style="margin-top:5px">No objects picked yet.</div>
-          </div>
-          <div class="grp"><span class="lbl">Bake Settings (Normal)</span>
-            <div class="r2" style="gap:8px">
-              <div><div class="tiny">Map Size:</div><div class="fld"><div class="in"></div></div></div>
-              <div><div class="tiny">Format:</div><div class="fld"><div class="in"></div></div></div>
-            </div>
-            <div class="fld">Padding (px): <div class="in w"></div> UV Channel: <div class="in w"></div></div>
-            <div class="fld">Push Amount: <div class="in w"></div>
-              <span class="chk" style="margin:0"><i></i>MikkT For Tangent</span></div>
-            <div class="chk"><i></i>Bitangent per Pixel</div>
-            <div class="chk dis"><i></i>Output To Normal Bump</div>
-            <div class="tiny">Output Folder:</div><div class="fld"><div class="in"></div></div>
-            <div class="btn" style="margin-bottom:6px">Browse...*</div>
-            <div class="fld">Filename Suffix: <div class="in" style="flex:none;width:78px"></div></div>
-          </div>
-          <div class="grp"><span class="lbl">Actions</span>
-            <div class="r2"><div class="btn">Bake Selected</div><div class="btn">Bake All Pairs</div></div>
-            <div class="bar" style="margin-top:5px"></div>
-            <div class="tiny">Ready.</div>
-          </div>
-        </div>
+        <p>Bake bằng Arnold.</p>
+        <div class="tw"><table class="doc">
+          <tr><th>Nút</th><th>Bake</th></tr>
+          <tr><td><span class="btnref">CARPAINT_attribute_blue</span></td><td>Bake ra&nbsp;CARPAINT_attribute_blue.</td></tr>
+          <tr><td><span class="btnref">DETAILS_attribute_blue</span></td><td>Bake ra DETAILS_attribute_blue.</td></tr>
+          <tr><td><span class="btnref">LOD4</span></td><td>Bake ra LOD4.</td></tr>
+          <tr><td><span class="btnref">Custom Bake</span></td><td>Bake ra Object đang chọn.&nbsp;</td></tr>
+        </table></div>
+        <div class="tw"><table class="doc">
+          <tr><th>Thông số</th><th>Bake thật</th><th>Bake thử</th></tr>
+          <tr><td>Kích thước</td><td>2048 × 2048</td><td>512 × 512</td></tr>
+          <tr><td>Samples</td><td>128</td><td>64</td></tr>
+          <tr><td>Spread / Falloff</td><td colspan="2">1 / 0.001</td></tr>
+          <tr><td>UV / Padding / Định dạng</td><td colspan="2">UV channel 1 / 8 px / PNG</td></tr>
+        </table></div>
+        <p>Bake xong hình như sẽ tự gán map AO vào object để check luôn hay sao đó?&nbsp; &nbsp;&nbsp;</p>
       </div>
 
-      <!-- Color panel -->
-      <div class="panel">
-        <div class="tbar" style="background:#3a3a3a"><span class="ico"></span>lam` ti' Color<span class="x">✕</span></div>
-        <div class="pb">
-          <div class="grp"><span class="lbl">High / Low Poly Pairs</span>
-            <div class="tiny">Pairs:</div>
-            <div class="listbox"></div>
-            <div class="r3"><div class="btn">Pick High Poly</div><div class="btn">Pick Low Poly</div><div class="btn">Add Pair &gt;&gt;</div></div>
-            <div class="r2"><div class="btn">Remove Selected</div><div class="btn">Clear All</div></div>
-            <div class="tiny" style="margin-top:5px">No objects picked yet.</div>
-          </div>
-          <div class="grp"><span class="lbl">Bake Settings (Color)</span>
-            <div class="r2" style="gap:8px">
-              <div><div class="tiny">Map Size:</div><div class="fld"><div class="in"></div></div></div>
-              <div><div class="tiny">Format:</div><div class="fld"><div class="in"></div></div></div>
-            </div>
-            <div class="fld">Padding (px): <div class="in w"></div> UV Channel: <div class="in w"></div></div>
-            <div class="fld" style="justify-content:flex-end">Push Amount: <div class="in w"></div></div>
-            <div class="tiny">Output Folder:</div><div class="fld"><div class="in"></div></div>
-            <div class="btn" style="margin-bottom:6px">Browse...*</div>
-            <div class="fld">Filename Suffix: <div class="in" style="flex:none;width:78px"></div></div>
-          </div>
-          <div class="grp"><span class="lbl">Actions</span>
-            <div class="r2"><div class="btn">Bake Selected</div><div class="btn">Bake All Pairs</div></div>
-            <div class="bar" style="margin-top:5px"></div>
-            <div class="tiny">Ready.</div>
-          </div>
-        </div>
+      <div class="sub" id="ao-substance" data-tool="ao" data-sec="ao-substance">
+        <h3>Setup export Substance + Check</h3>
+        <p>Setup này dùng cho 2 mục đích :<br>
+          - Gán material PBR check nhanh trong 3dsmax nếu chưa đưa vào engine.<br>
+          - Xuất fbx sang Substance painter.&nbsp; &nbsp; &nbsp;</p>
+<ul>
+          <li><span class="btnref">Add PBR Material</span> Setup xong thì bấm nút này để gán PBR material.&nbsp; &nbsp;Nút <span class="btnref">...</span> thì dẫn vào folder chứa maps.</li>
+          <li><span class="btnref">HDRI Reflections</span> bật môi trường HDRI làm tí bóng 7 màu moè&nbsp; . Lần đầu tick sẽ hỏi file .hdr/.exr (không có file HDR thì sẽ không phản chiếu mà phản tác dụng).&nbsp; &nbsp;</li>
+          <li>Muốn xuất fbx sang Substance thì chọn object rồi bấm <span class="btnref">Export FBX for Substance</span>. Tick <span class="btnref">Launch Substance Painter</span> thì Substance tự mở và tạo project mới với file vừa xuất (nhưng khuyên là nên import = tay để còn chỉnh setting,tự động nhiều quá không tốt) .</li>
+        </ul>
+        <div class="tw"><table class="doc">
+          <tr><th>Tên file texture</th><th>Gán vào</th><th>UV</th></tr>
+          <tr><td><code>DETAILS_albedo_RGB</code></td><td>Base Color</td><td>1</td></tr>
+          <tr><td><code>DETAILS_attribute_red</code></td><td>Metalness</td><td>1</td></tr>
+          <tr><td><code>DETAILS_attribute_green</code></td><td>Roughness</td><td>1</td></tr>
+          <tr><td><code>DETAILS_attribute_blue</code></td><td>AO</td><td>1</td></tr>
+          <tr><td><code>DETAILS_normal</code></td><td>Normal</td><td>2</td></tr>
+        </table></div>
+        <p>Các file texture này export  từ  Photoshop phải đặt đúng tên và để cùng một folder.&nbsp; &nbsp; &nbsp;</p>
       </div>
 
-      <!-- steps -->
-      <div>
-        <div class="step"><div class="k">1</div><div>
-          <h3>Pick high – low</h3>
-          <p><span class="mono"> Pick high - low rồi addpair,có thể add nhiều cặp,không quan trọng tên tuổi quê quán.&nbsp; &nbsp;&nbsp;</span><span class="mono">&nbsp;</span></p>
-</div></div>
-
-        <div class="step"><div class="k">2</div><div>
-          <h3>Set bake settings</h3>
-          <p>Thường chỉnh cái push amount thôi,highpoly dày cơm thì push cao.</p>
-          <div class="note"><b>Push Amount</b> là độ xa gần của cage bao quanh low poly.</div>
-        </div></div>
-
-        <div class="step"><div class="k">3</div><div>
-          <h3>Set output folder</h3>
-          <p>Chụt phải mở folder lưu file.&nbsp;</p>
-        </div></div>
-
-        <div class="step"><div class="k">4</div><div>
-          <h3>Bake</h3>
-          <p><span class="mono">Bake Selected thôi cho dễ quản lý.</span> </p>
-</div></div>
-
-        <div class="step"><div class="k">5</div><div>
-          <h3>Show&nbsp;</h3>
-          <p>&nbsp;Tự add map và isolate low poly để check liền sau khi render xong.&nbsp; &nbsp; &nbsp;</p>
-        </div></div>
+      <div class="sub" id="ao-bakelod" data-tool="ao" data-sec="ao-bakelod">
+        <h3>Setup bake LOD</h3>
+        <p><span class="btnref">Setup bake LOD</span> Là Setup sẵn scene với LOD1 và LOD4/5 để bake maps.&nbsp;</p>
+        <p><span class="btnref">Add Material Bake</span> Dẫn đúng folder chứa texture như ở trên sẽ tự gán material.&nbsp; &nbsp; </p>
       </div>
-    </div>
+    </section>
 
-  </div>
+    <!-- ================= NORMAL ================= -->
+    <section class="tool" id="normal">
+      <div class="th"><h2>làm tí Normal</h2><span class="chip nm">làm tí Normal</span></div>
+      <p class="lead">Bake Normal map từ high poly sang low poly, có thể bắt nhiều cọp (cặp),dùng pick nên không cần  điều kiện gì về tên tuổi,quê quán hoặc năm sinh.&nbsp; &nbsp; &nbsp;</p>
+      <div class="mob" data-mob="nm"></div>
+
+      <div class="sub" id="nm-pairs" data-tool="nm" data-sec="nm-pairs">
+        <h3>Các bước :</h3>
+        <ol>
+          <li>Bấm <span class="btnref">Pick High Poly</span> </li>
+          <li>Bấm <span class="btnref">Pick Low Poly</span> </li>
+          <li>Bấm <span class="btnref">Add Pair &gt;&gt;</span>. Danh sách hiện dạng <code>high   --&gt;   low</code>.</li>
+        </ol>
+        <p>Lặp lại thao tác để add thêm cặp low-high khác.&nbsp;&nbsp;</p>
+        <p><span class="btnref">Remove Selected</span> xoá các dòng đang chọn (<kbd>Ctrl</kbd>/<kbd>Shift</kbd>- để chọn nhiều). <span class="btnref">Clear All</span> xoá hết.</p>
+      </div>
+
+      <div class="sub" id="nm-settings" data-tool="nm" data-sec="nm-settings">
+        <h3>Bake Settings</h3>
+        <p>Dùng Bake To Texture › Normal của 3ds Max.</p>
+        <div class="tw"><table class="doc">
+          <tr><th>Thông số</th><th>Mặc định</th><th>Ý nghĩa</th></tr>
+          <tr><td>Map Size / Format</td><td>2048 / PNG</td><td>Size 512–8192; định dạng PNG, TGA, TIF, EXR.</td></tr>
+          <tr><td>Padding (px)</td><td>4</td><td>Tràn viền    UV.</td></tr>
+          <tr><td>UV Channel</td><td>2</td><td>Kênh UV.</td></tr>
+          <tr><td>Push Amount</td><td>0.5</td><td>Độ bao phủ của cage (chỉnh cái này trước khi bake).</td></tr>
+          <tr><td>MikkT For Tangent</td><td>bật</td><td>Tangent.</td></tr>
+          <tr><td>Bitangent per Pixel</td><td>bật</td><td>Không biết là gì. Nên để mặc&nbsp; &nbsp; &nbsp;định.</td></tr>
+          <tr><td>Output To Normal Bump</td><td>tắt, khoá</td><td>&nbsp;Không biết là gì. Nên để mặc&nbsp; &nbsp; &nbsp;định.<br></td></tr>
+          <tr><td>Output Folder</td><td>thư mục file .max</td><td><span class="btnref">Browse...*</span> chuột trái  chọn folder, chuột phải  mở folder.</td></tr>
+          <tr><td>Filename Suffix</td><td><code>_Normal</code></td><td>Tên file = tên low poly + hậu tố.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="sub" id="nm-bake" data-tool="nm" data-sec="nm-bake">
+        <h3>Bake</h3>
+        <ul>
+          <li><span class="btnref">Bake All Pairs</span> bake toàn bộ danh sách; <span class="btnref">Bake Selected</span> chỉ bake các dòng đang chọn.</li>
+          
+          <li>Hình như bake xong, các low poly được gán map normal để bạn xem kết quả ngay đó.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= COLOR ================= -->
+    <section class="tool" id="color">
+      <div class="th"><h2>làm tí Color</h2><span class="chip col">làm tí Color</span></div>
+      <p class="lead">Bake màu (Diffuse) từ high poly sang low poly. Cách dùng giống làm tí Normal.</p>
+      <div class="mob" data-mob="col"></div>
+
+      <div class="sub" id="col-pairs" data-tool="col" data-sec="col-pairs">
+        <h3>Ghép cặp High / Low</h3>
+        <p>Giống hệt làm tí Normal: <span class="btnref">Pick High Poly</span>, <span class="btnref">Pick Low Poly</span>, <span class="btnref">Add Pair &gt;&gt;</span>. Remove Selected và Clear All để sửa danh sách.</p>
+      </div>
+      <div class="sub" id="col-settings" data-tool="col" data-sec="col-settings">
+        <h3>Bake Settings</h3>
+        <div class="tw"><table class="doc">
+          <tr><th>Khác với làm tí Normal</th><th>làm tí Color</th></tr>
+          <tr><td>Renderer</td><td>tự chuyển sang Scanline</td></tr>
+          <tr><td>UV Channel mặc định</td><td>1</td></tr>
+          <tr><td>Hậu tố file</td><td><code>_Color</code></td></tr>
+          <tr><td>MikkT / Bitangent</td><td>không có, bake màu không cần</td></tr>
+        </table></div>
+        <p>Map Size, Format, Padding, Push Amount, Output Folder giống làm tí Normal.</p>
+      </div>
+      <div class="sub" id="col-bake" data-tool="col" data-sec="col-bake">
+        <h3>Bake</h3>
+        <ul>
+          <li>Bake màu gốc của high poly, không ánh sáng, không bóng đổ.</li>
+          <li>Giữ nguyên material của high poly vì màu đã setup sẵn trên đó.</li>
+          <li>Bake Selected / Bake All Pairs, thanh tiến trình và thông báo giống làm tí Normal.</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- ================= SELECT ================= -->
-  <div class="band sel">
-    <h2>Select <small>giống select linked bên Blender&nbsp;</small></h2>
-    <div class="two">
-      <div class="panel">
-        <div class="tbar" style="background:#2e7d32"><span class="ico"></span>lam` ti' Select<span class="x">✕</span></div>
-        <div class="pb">
-          <div class="grp" style="margin-bottom:0"><span class="lbl">Select Linked</span>
-            <div class="r2" style="gap:6px;margin-bottom:6px">
-              <div class="btn" style="padding:7px 2px">Element</div>
-              <div class="btn" style="padding:7px 2px">Material</div>
-            </div>
-            <div class="r2" style="gap:6px;margin-bottom:6px">
-              <div class="btn" style="padding:7px 2px">Smoothgroup</div>
-              <div class="btn" style="padding:7px 2px">UV Island</div>
-            </div>
-            <div class="r2" style="gap:6px">
-              <div class="btn" style="padding:7px 2px">Open Edges*</div>
-              <div class="fld" style="margin:0;font-size:10px">UVchannel <div class="in w" style="width:34px"></div></div>
-            </div>
-          </div>
-        </div>
+    <section class="tool" id="select">
+      <div class="th"><h2>làm tí Select</h2><span class="chip sel">làm tí Select</span></div>
+      <p class="lead">Select Linked kiểu Blender: chọn vài face (hoặc vertex, edge), bấm nút để lan vùng chọn theo quy tắc.</p>
+      <div class="mob" data-mob="sel"></div>
+
+      <div class="sub" id="sel-modes" data-tool="sel" data-sec="sel-modes">
+        <h3>Bốn kiểu lan vùng chọn</h3>
+        <div class="tw"><table class="doc">
+          <tr><th>Nút</th><th>Lan tới</th></tr>
+          <tr><td><span class="btnref">Element</span></td><td>toàn bộ phần dính liền</td></tr>
+          <tr><td><span class="btnref">Material</span></td><td>các face cùng Material ID</td></tr>
+          <tr><td><span class="btnref">Smoothgroup</span></td><td>chỉ qua cạnh mà hai face chung Smoothing Group, dừng ở cạnh sharp</td></tr>
+          <tr><td><span class="btnref">UV Island</span></td><td>chỉ qua cạnh không nằm trên seam UV; chọn kênh UV ở ô <span class="btnref">UVchannel</span></td></tr>
+        </table></div>
       </div>
-
-      <div>
-        <p style="font-size:13px;color:#c2c9cb;line-height:1.5;margin-bottom:14px">
-          Quy tắc là chọn face trước rồi mới bấm nút</p>
-        <div class="defs">
-          <div class="def"><b>Element</b><p>Lan ra theo Element của face đang chọn</p>
-          </div>
-          <div class="def"><b>Material</b><p>Lan ra theo ID của face đang chọn&nbsp;</p>
-          </div>
-          <div class="def"><b>Smoothgroup</b><p>Lan ra theo Smoothgroup của face đang chọn</p>
-          </div>
-          <div class="def"><b>UV Island</b><p>Lan ra theo mảng UV của face đang chọn&nbsp;</p>
-          </div>
-          <div class="def"><b>Open Edges</b><p>Chụt trái show cạnh hở,bấm nữa để tắt. Chụt phải select cạnh hở.&nbsp; &nbsp; &nbsp;&nbsp;</p>
-          </div>
-        </div>
+      <div class="sub" id="sel-open" data-tool="sel" data-sec="sel-open">
+        <h3>Open Edges*</h3>
+        <p>Tìm cạnh hở, tức lỗ trên mesh.</p>
+        <ul>
+          <li><b>Chuột trái</b>: bật xem trước. Viewport chuyển sang Clay, cạnh hở hiện màu xanh lam và tự cập nhật khi bạn sửa mesh. Bấm trái lần nữa để tắt và trả shading cũ.</li>
+          <li><b>Chuột phải</b>: chọn thật các cạnh hở và chuyển sang cấp Edge.</li>
+        </ul>
       </div>
-    </div>
-  </div>
+      <div class="sub" id="sel-where" data-tool="sel" data-sec="sel-where">
+        <h3>Dùng được ở đâu</h3>
+        <p>Cấp Vertex, Edge, Polygon của Editable Poly hoặc Edit Poly, và trong UV Editor của Unwrap UVW. Chọn nhiều object cùng lúc cũng được. Object chưa có modifier thì tool tự thêm Edit Poly.</p>
+      </div>
+    </section>
 
-  <div class="sign">
-    <span>Hướng dẫn cho lamti_tools.ms</span>
-    <span>tools from A.I nên hên xui nhé!</span>
-  </div>
+    <!-- ================= ID ================= -->
+    <section class="tool" id="id">
+      <div class="th"><h2>làm tí ID</h2><span class="chip id">làm tí ID</span></div>
+      <p class="lead">Bảng Material ID của Multi/Sub đang dùng trên object chọn, xếp theo ID tăng dần. Chưa chọn object thì bảng hiện “Chọn object Editable Poly”.</p>
+      <div class="mob" data-mob="id"></div>
 
+      <div class="sub" id="id-multi" data-tool="id" data-sec="id-multi">
+        <h3>Multi/Sub đang xem</h3>
+        <ul>
+          <li>Ô trên cùng là tên Multi/Sub. Double-click để đổi tên.</li>
+          <li>Nút <span class="btnref">▼</span> mở danh sách để chuyển sang Multi/Sub khác.</li>
+          <li>Dòng chữ xanh bên dưới liệt kê các object đang dùng.</li>
+        </ul>
+      </div>
+      <div class="sub" id="id-rows" data-tool="id" data-sec="id-rows">
+        <h3>Thao tác trên bảng</h3>
+        <div class="tw"><table class="doc">
+          <tr><th>Thao tác</th><th>Kết quả</th></tr>
+          <tr><td>Click 1 dòng</td><td>Chọn các face có ID đó. Giữ <kbd>Shift</kbd> để cộng dồn.</td></tr>
+          <tr><td>Double-click cột Material</td><td>Đổi tên material ngay trên dòng.</td></tr>
+          <tr><td>Double-click cột ID</td><td>Đổi ID cho face. ID lớn hơn ID cao nhất thì tool tự tạo đủ slot còn thiếu. ID hợp lệ từ 1 đến 65535.</td></tr>
+          <tr><td>Kéo thả vào giữa 1 dòng</td><td>Hoán đổi ID hai dòng, face đi theo material.</td></tr>
+          <tr><td>Kéo thả vào khe giữa 2 dòng</td><td>Chèn ID: tạo bản copy material ở vị trí mới, các ID phía sau dồn lên.</td></tr>
+          <tr><td>Click ô màu</td><td>Mở thông số material trong Material Editor.</td></tr>
+          <tr><td>Chuột phải 1 dòng</td><td>Gán ID của dòng cho face đang chọn (cấp Polygon hoặc Element).</td></tr>
+        </table></div>
+        <p>Bảng tự sáng dòng theo face bạn chọn ngoài viewport và cập nhật khi Undo/Redo.</p>
+      </div>
+      <div class="sub" id="id-filter" data-tool="id" data-sec="id-filter">
+        <h3>Lọc và cảnh báo</h3>
+        <ul>
+          <li>Tick <span class="btnref">Chỉ hiện ID có mesh</span> để ẩn slot không có face nào.</li>
+          <li>Dòng chữ đỏ “Object chưa có Multi/Sub-Object – bấm để gán” hiện khi object có nhiều ID mà chưa dùng Multi/Sub. Bấm vào để tạo; các slot mới có màu ngẫu nhiên cho dễ phân biệt.</li>
+          <li>Multi/Sub có slot trống bị trùng ID thì tool hỏi tự sửa: xoá slot trống và xếp lại theo ID.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= VERTEX ================= -->
+    <section class="tool" id="vertex">
+      <div class="th"><h2>đếm tí Vertex</h2><span class="chip vx">đếm tí Vertex</span></div>
+      <p class="lead">Đếm vertex hình học (Geo) và vertex UV của từng layer LOD, so với budget. Kéo giãn cửa sổ để bảng rộng hơn; kích thước được nhớ cho lần sau.</p>
+      <div class="mob" data-mob="vx"></div>
+
+      <div class="sub" id="vx-scope" data-tool="vx" data-sec="vx-scope">
+        <h3>Phạm vi và Live Check</h3>
+        <ul>
+          <li><span class="btnref">All Layers</span> đếm mọi layer có chữ LOD1…LOD5 trong tên. <span class="btnref">Selected Objs</span> chỉ đếm layer chứa object đang chọn.</li>
+          <li><span class="btnref">Live Check</span> bật (nút xanh) thì đếm lại mỗi nửa giây, tiện khi đang tối ưu mesh. Bấm lần nữa để dừng.</li>
+        </ul>
+      </div>
+      <div class="sub" id="vx-table" data-tool="vx" data-sec="vx-table">
+        <h3>Đọc bảng</h3>
+        <p>Ô Geo và UV <b>xanh lá</b> là trong budget, <b>đỏ</b> là vượt. Object tên chứa <code>caliper</code>, <code>motion</code>, <code>emissive</code> không được tính. Object có modifier được đếm trên mesh sau modifier.</p>
+        <div class="tw"><table class="doc">
+          <tr><th>LOD</th><th>Geo Limit</th><th>UV Limit</th></tr>
+          <tr><td>LOD1</td><td>45 000</td><td>48 000</td></tr>
+          <tr><td>LOD2</td><td>22 000</td><td>28 000</td></tr>
+          <tr><td>LOD3</td><td>8 000</td><td>17 000</td></tr>
+          <tr><td>LOD4</td><td>4 000</td><td>8 000</td></tr>
+          <tr><td>LOD5</td><td>400</td><td>400</td></tr>
+        </table></div>
+      </div>
+      <div class="sub" id="vx-iso" data-tool="vx" data-sec="vx-iso">
+        <h3>Isolate và chuyển LOD</h3>
+        <ul>
+          <li>Click 1 dòng để isolate layer đó; ô Layer tô xanh (A). Click lại dòng đó hoặc chuột phải để Show All.</li>
+          <li><span class="btnref">&lt; Prev</span> và <span class="btnref">Next &gt;</span> isolate LOD trước/sau.</li>
+          <li><span class="btnref">Swap A&lt;&gt;B</span> nhảy qua lại giữa hai LOD vừa xem; LOD trước đó tô vàng (B).</li>
+          <li><span class="btnref">Show All</span> hiện lại mọi object. Dòng dưới cùng báo trạng thái Live, A và B.</li>
+        </ul>
+      </div>
+      <div class="sub" id="vx-hotkey" data-tool="vx" data-sec="vx-hotkey">
+        <h3>Phím tắt</h3>
+        <p>Vào <b>Customize › Hotkey Editor</b>, tìm nhóm <b>LOD Budget Checker</b>: LOD Next, LOD Prev, LOD Swap A&lt;&gt;B, LOD Live Toggle. Phím tắt chỉ chạy khi bảng đếm tí Vertex đang mở.</p>
+      </div>
+    </section>
+
+    <!-- ================= ERRORS ================= -->
+    <section class="tool" id="errors">
+      <h2>Khi gặp lỗi</h2>
+      <div class="sub" id="gen-err" data-tool="gen" data-sec="gen-err">
+        <div class="tw"><table class="doc">
+          <tr><th>Thông báo / hiện tượng</th><th>Cách xử lý</th></tr>
+          <tr><td>Không tìm thấy Renderer Arnold (MAXtoA)</td><td>Bật plugin Arnold trong Plug-in Manager rồi chạy lại.</td></tr>
+          <tr><td>Không có object nào nằm trong layer LOD1 / LOD4 / LOD5</td><td>Đổi tên layer đúng chính xác LOD1, LOD4, LOD5.</td></tr>
+          <tr><td>Render UV (…) thất bại</td><td>Mở MAXScript Listener (<kbd>F11</kbd>) xem dòng lỗi, thường do object thiếu UV channel cần render.</td></tr>
+          <tr><td>Không tìm thấy object 'CARPAINT_attribute_blue'</td><td>Chạy AO Setup trước, hoặc dùng Custom Bake.</td></tr>
+          <tr><td>Không tìm thấy CARPAINT_LOD4 và DETAILS_LOD4</td><td>Chạy AO Setup và chọn LOD4.</td></tr>
+          <tr><td>AO vẫn bị ĐEN sau 3 lần bake</td><td>Kiểm tra mesh có UV channel 1 và normal không bị lật, rồi bake lại.</td></tr>
+          <tr><td>Normal map lủng, có vùng đen</td><td>Tăng Push Amount để cage bao trọn high poly.</td></tr>
+          <tr><td>Please pick both a High Poly and a Low Poly…</td><td>Pick đủ cả high và low trước khi Add Pair.</td></tr>
+          <tr><td>No LOD layer found in scene.</td><td>Layer cần có chữ LOD1…LOD5 trong tên.</td></tr>
+          <tr><td>Chữ tiếng Việt hiện dấu hỏi</td><td>File bị lưu sai encoding. Lưu lại dạng UTF-8 with BOM.</td></tr>
+        </table></div>
+        <p>Lỗi khác: copy nguyên dòng lỗi trong MAXScript Listener, kèm phiên bản 3ds Max đang dùng, gửi lại để sửa.</p>
+      </div>
+    </section>
+  </main>
 </div>
+
+<footer>làm tí tools v1.7, cập nhật 01/10/2026. Tool from A.I nên hên xui, gặp lỗi cứ báo để sửa.</footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  setTimeout(() => document.body.classList.remove('boot'), 1700);
+
+  /* ===================== panel specs (positions from lamti_tools.ms) ===================== */
+  // k: g=group b=button k=checkbox e=edit d=dropdown l=label s=color sp=spinner ls=listbox pb=progress tbl=table lk=link rb=radio ck=checkbutton lb=launcher button
+  function bakerSpec(title, kind, uv, suffix, mikk){
+    const sh = mikk ? 0 : -54, p = kind === 'Normal' ? 'nm' : 'col';
+    const it = [
+      {k:'g',x:5,y:6,w:250,h:200,t:'High / Low Poly Pairs',s:p+'-pairs'},
+      {k:'l',x:10,y:22,w:60,h:14,t:'Pairs:',s:p+'-pairs'},
+      {k:'ls',x:10,y:38,w:240,h:86,s:p+'-pairs',html:'<div>door_fl_high   --&gt;   door_fl_LOD1</div><div class="sel">wheel_high   --&gt;   wheelFL_LOD1</div><div>bumper_high   --&gt;   bumper_f_LOD1</div>'},
+      {k:'b',x:10,y:130,w:78,h:21,t:'Pick High Poly',s:p+'-pairs'},
+      {k:'b',x:91,y:130,w:78,h:21,t:'Pick Low Poly',s:p+'-pairs'},
+      {k:'b',x:172,y:130,w:78,h:21,t:'Add Pair >>',s:p+'-pairs'},
+      {k:'b',x:10,y:155,w:118,h:21,t:'Remove Selected',s:p+'-pairs'},
+      {k:'b',x:132,y:155,w:118,h:21,t:'Clear All',s:p+'-pairs'},
+      {k:'l',x:10,y:182,w:240,h:14,t:'No objects picked yet.',s:p+'-pairs'},
+      {k:'g',x:5,y:214,w:250,h:256+sh,t:'Bake Settings  (matches Bake To Texture > ' + kind + ')',s:p+'-settings'},
+      {k:'l',x:10,y:230,w:110,h:14,t:'Map Size:',s:p+'-settings'},
+      {k:'d',x:10,y:245,w:110,h:19,t:'2048',s:p+'-settings'},
+      {k:'l',x:140,y:230,w:110,h:14,t:'Format:',s:p+'-settings'},
+      {k:'d',x:140,y:245,w:110,h:19,t:'PNG',s:p+'-settings'},
+      {k:'sp',x:10,y:272,w:118,h:18,t:'Padding (px):',v:'4',s:p+'-settings'},
+      {k:'sp',x:140,y:272,w:110,h:18,t:'UV Channel:',v:uv,s:p+'-settings'},
+      {k:'sp',x:10,y:296,w:118,h:18,t:'Push Amount:',v:'0.5',s:p+'-settings',tip:'Tăng lên nếu bake bị lủng'}
+    ];
+    if (mikk) it.push(
+      {k:'k',x:10,y:322,w:200,h:15,t:'MikkT For Tangent',on:1,s:p+'-settings'},
+      {k:'k',x:10,y:340,w:200,h:15,t:'Bitangent per Pixel',on:1,s:p+'-settings'},
+      {k:'k',x:10,y:358,w:200,h:15,t:'Output To Normal Bump',cls:'off',s:p+'-settings'});
+    it.push(
+      {k:'l',x:10,y:380+sh,w:120,h:14,t:'Output Folder:',s:p+'-settings'},
+      {k:'e',x:10,y:396+sh,w:240,h:19,t:'D:\\cars\\bake\\',s:p+'-settings'},
+      {k:'b',x:50,y:420+sh,w:160,h:21,t:'Browse...*',s:p+'-settings',tip:'Right-click: open output folder'},
+      {k:'l',x:10,y:449+sh,w:90,h:14,t:'Filename Suffix:',s:p+'-settings'},
+      {k:'e',x:100,y:446+sh,w:150,h:19,t:suffix,s:p+'-settings'},
+      {k:'g',x:5,y:478+sh,w:250,h:84,t:'Actions',s:p+'-bake'},
+      {k:'b',x:10,y:496+sh,w:116,h:18,t:'Bake Selected',s:p+'-bake'},
+      {k:'b',x:134,y:496+sh,w:116,h:18,t:'Bake All Pairs',s:p+'-bake'},
+      {k:'pb',x:10,y:522+sh,w:240,h:10,s:p+'-bake'},
+      {k:'l',x:10,y:538+sh,w:240,h:14,t:'Baked (2/3): wheelFL_LOD1' + suffix,s:p+'-bake'});
+    return {title, w:260, h:568+sh, items:it};
+  }
+
+  const SPECS = {
+    gen: {title:'làm tí tools', w:212, h:240, items:[
+      {k:'lb',x:16,y:8,w:178,h:27,t:'làm tí AO',cls:'ao',go:'ao',tip:'Mở / đóng bảng làm tí AO'},
+      {k:'lb',x:16,y:39,w:178,h:27,t:'làm tí Normal',cls:'nm',go:'normal',tip:'Bake Normal: High Poly > Low Poly'},
+      {k:'lb',x:16,y:70,w:178,h:27,t:'làm tí Color',cls:'col',go:'color',tip:'Bake Color: High Poly > Low Poly'},
+      {k:'lb',x:16,y:101,w:178,h:27,t:'làm tí Select',cls:'sel',go:'select',tip:'Select Linked: Element / Material / Smoothgroup / UV Island / Open Edges'},
+      {k:'lb',x:16,y:132,w:178,h:27,t:'làm tí ID',cls:'id',go:'id',tip:'Material Select: bảng Material ID / Multi/Sub'},
+      {k:'lb',x:16,y:163,w:178,h:27,t:'đếm tí Vertex',cls:'vx',go:'vertex',tip:'LOD Budget Checker: đếm vertex/UV theo layer LOD'},
+      {k:'lk',x:16,y:198,w:178,h:16,t:'Document - tool from A.I nên hên xui',s:'gen-err',tip:'Mở trang hướng dẫn này'},
+      {k:'l',x:16,y:216,w:178,h:16,t:'Version v1.7  -  01/10/2026',s:'gen-err'}
+    ]},
+    ao: {title:'làm tí AO', w:210, h:726, items:[
+      {k:'g',x:5,y:5,w:202,h:66,t:'Output',s:'ao-output'},
+      {k:'k',x:14,y:18,w:90,h:15,t:'Auto Save',on:1,s:'ao-output'},
+      {k:'e',x:9,y:38,w:151,h:19,t:'D:\\cars\\render',s:'ao-output'},
+      {k:'b',x:165,y:37,w:32,h:21,t:'...*',s:'ao-output',tip:'Trái: chọn thư mục | Phải: mở thư mục'},
+      {k:'g',x:5,y:75,w:202,h:210,t:'Render Dilation',s:'ao-dilation'},
+      {k:'l',x:14,y:94,w:32,h:15,t:'Size:',s:'ao-dilation'},
+      {k:'d',x:46,y:91,w:146,h:19,t:'2048',s:'ao-dilation'},
+      {k:'s',x:14,y:114,w:87,h:18,t:'Solid:',c:'#7f7f7f',s:'ao-dilation'},
+      {k:'s',x:106,y:114,w:87,h:18,t:'Wire:',c:'#00ff00',s:'ao-dilation'},
+      {k:'l',x:14,y:138,w:110,h:13,t:'Channel 1',s:'ao-dilation'},
+      {k:'b',x:14,y:151,w:87,h:23,t:'CarPaint Details',s:'ao-dilation'},
+      {k:'b',x:106,y:151,w:87,h:23,t:'Details',s:'ao-dilation',tip:'Tự tách bánh xe ra ảnh Rim'},
+      {k:'b',x:14,y:178,w:87,h:23,t:'Glass',s:'ao-dilation'},
+      {k:'b',x:106,y:178,w:87,h:23,t:'LOD',s:'ao-dilation'},
+      {k:'l',x:14,y:206,w:110,h:13,t:'Channel 2',s:'ao-dilation'},
+      {k:'b',x:14,y:219,w:87,h:23,t:'CarPaint',s:'ao-dilation'},
+      {k:'b',x:106,y:219,w:87,h:23,t:'Details_NM',s:'ao-dilation'},
+      {k:'b',x:14,y:247,w:178,h:27,t:'For lazy people',s:'ao-dilation',tip:'Render tất cả Dilation'},
+      {k:'g',x:5,y:290,w:202,h:160,t:'Setup - Render AO',s:'ao-setup ao-bake'},
+      {k:'b',x:14,y:304,w:178,h:23,t:'AO Setup',s:'ao-setup',tip:'detach, move, rotate, open part'},
+      {k:'b',x:14,y:332,w:178,h:23,t:'CARPAINT_attribute_blue',s:'ao-bake',tip:'Gán Standard material + Setup + Bake AO'},
+      {k:'b',x:14,y:359,w:178,h:23,t:'DETAILS_attribute_blue',s:'ao-bake',tip:'Gán Standard material + Setup + Bake AO'},
+      {k:'b',x:14,y:386,w:178,h:23,t:'LOD4',s:'ao-bake',tip:'Bake AO cho CARPAINT_LOD4 và DETAILS_LOD4 (2 tấm riêng)'},
+      {k:'b',x:14,y:414,w:178,h:23,t:'Custom Bake',s:'ao-bake',tip:'Bake AO cho đúng 1 object đang chọn'},
+      {k:'g',x:5,y:455,w:202,h:176,t:'Setup export Substance + Check',s:'ao-substance'},
+      {k:'b',x:14,y:474,w:178,h:32,t:'Setup export Substance & Check',s:'ao-substance',tip:'detach, move, rotate, open part'},
+      {k:'b',x:14,y:514,w:146,h:23,t:'Add PBR Material',s:'ao-substance',tip:'Tạo và gán PBR Metal/Rough cho DETAILS và CARPAINT'},
+      {k:'b',x:165,y:514,w:32,h:23,t:'...',s:'ao-substance',tip:'Chọn thư mục texture, tự gán theo tên'},
+      {k:'k',x:14,y:546,w:146,h:15,t:'HDRI Reflections',s:'ao-substance',tip:'Bật/tắt HDRI cho reflections'},
+      {k:'b',x:165,y:544,w:32,h:23,t:'...',s:'ao-substance',tip:'Chọn file HDRI (.hdr/.exr)'},
+      {k:'b',x:14,y:578,w:146,h:23,t:'Export FBX for Substance',s:'ao-substance',tip:'Export object đang chọn ra FBX'},
+      {k:'b',x:165,y:578,w:32,h:23,t:'...',s:'ao-substance',tip:'Chọn file Substance Painter.exe'},
+      {k:'k',x:14,y:610,w:183,h:15,t:'Launch Substance Painter',s:'ao-substance',tip:'Tự mở Painter và tạo project mới với FBX vừa export'},
+      {k:'g',x:5,y:636,w:202,h:82,t:'Setup bake LOD',s:'ao-bakelod'},
+      {k:'b',x:14,y:651,w:178,h:32,t:'Setup bake LOD',s:'ao-bakelod',tip:'Xoá caliper/motion, attach tire vào wheel, glass_detachable vào glass'},
+      {k:'b',x:14,y:689,w:146,h:23,t:'Add Material Bake',s:'ao-bakelod',tip:'Gán material cho object layer LOD1'},
+      {k:'b',x:165,y:689,w:32,h:23,t:'...',s:'ao-bakelod',tip:'Chọn thư mục texture để bake'}
+    ]},
+    nm: bakerSpec('làm tí Normal', 'Normal', '2', '_Normal', true),
+    col: bakerSpec('làm tí Color', 'Color', '1', '_Color', false),
+    sel: {title:'làm tí Select', w:185, h:120, items:[
+      {k:'g',x:6,y:6,w:175,h:110,t:'Select Linked',s:'sel-where'},
+      {k:'b',x:13,y:26,w:79,h:26,t:'Element',s:'sel-modes'},
+      {k:'b',x:95,y:26,w:79,h:26,t:'Material',s:'sel-modes'},
+      {k:'b',x:13,y:56,w:79,h:26,t:'Smoothgroup',s:'sel-modes',tip:'Sharp (Smoothing Group)'},
+      {k:'b',x:95,y:56,w:79,h:26,t:'UV Island',s:'sel-modes'},
+      {k:'b',x:13,y:86,w:79,h:22,t:'Open Edges*',s:'sel-open',tip:'Trái: bật/tắt xem trước cạnh hở | Phải: chọn thật cạnh hở'},
+      {k:'l',x:96,y:91,w:50,h:16,t:'UVchannel',s:'sel-modes'},
+      {k:'sp',x:146,y:90,w:30,h:18,t:'',v:'1',s:'sel-modes'}
+    ]},
+    id: {title:'Material Select', w:340, h:330, items:[
+      {k:'k',x:10,y:7,w:200,h:15,t:'Chỉ hiện ID có mesh',s:'id-filter'},
+      {k:'e',x:8,y:28,w:298,h:20,t:'car_multi',s:'id-multi',tip:'Double-click để đổi tên Multi/Sub'},
+      {k:'b',x:308,y:28,w:24,h:20,t:'▼',s:'id-multi',tip:'Chọn Multi/Sub khác'},
+      {k:'lk',x:8,y:51,w:324,h:16,t:'Object: DETAILS, wheelFL_LOD1, wheelFR_LOD1',s:'id-multi'},
+      {k:'tbl',x:8,y:72,w:324,h:250,s:'id-rows',html:
+        '<table><tr><th style="width:22px"></th><th>Material</th><th style="width:50px">ID</th></tr>' +
+        [['#a6bdd0','carpaint',1],['#333','details',2],['#8fb3c9','glass',3],['#b8b8b8','rims',4],['#222','tires',5],['#6a5a4a','underside',6],['#d0d0d0','LOD_details',7]]
+          .map((r,i) => '<tr' + (i===1?' class="hl"':'') + '><td><span class="cd" style="background:' + r[0] + '"></span></td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>').join('') + '</table>'}
+    ]},
+    vx: {title:'đếm tí Vertex', w:400, h:280, items:[
+      {k:'rb',x:8,y:9,w:90,h:15,t:'All Layers',s:'vx-scope'},
+      {k:'l',x:100,y:9,w:100,h:15,t:'○ Selected Objs',s:'vx-scope'},
+      {k:'ck',x:272,y:6,w:120,h:22,t:'Live Check: ON',s:'vx-scope',tip:'ON = đếm live liên tục | OFF = dừng đếm'},
+      {k:'b',x:8,y:32,w:58,h:22,t:'< Prev',s:'vx-iso',tip:'Isolate LOD trước'},
+      {k:'b',x:70,y:32,w:76,h:22,t:'Swap A<>B',s:'vx-iso',tip:'Swap qua lại giữa 2 LOD vừa isolate'},
+      {k:'b',x:150,y:32,w:58,h:22,t:'Next >',s:'vx-iso',tip:'Isolate LOD kế tiếp'},
+      {k:'b',x:212,y:32,w:64,h:22,t:'Show All',s:'vx-iso',tip:'Unhide tất cả object'},
+      {k:'tbl',x:7,y:58,w:386,h:196,s:'vx-table vx-iso',html:
+        '<table><tr><th>Layer</th><th>Objs</th><th>Geo</th><th>Geo Limit</th><th>UV</th><th>UV Limit</th></tr>' +
+        '<tr><td class="a">LOD1</td><td>42</td><td class="ok">41210</td><td>45000</td><td class="ok">46980</td><td>48000</td></tr>' +
+        '<tr><td class="bb">LOD2</td><td>18</td><td class="over">23514</td><td>22000</td><td class="ok">27110</td><td>28000</td></tr>' +
+        '<tr><td>LOD3</td><td>9</td><td class="ok">7620</td><td>8000</td><td class="ok">15890</td><td>17000</td></tr>' +
+        '<tr><td>LOD4</td><td>4</td><td class="ok">3488</td><td>4000</td><td class="ok">7210</td><td>8000</td></tr>' +
+        '<tr><td>LOD5</td><td>1</td><td class="ok">388</td><td>400</td><td class="over">412</td><td>400</td></tr></table>'},
+      {k:'l',x:8,y:260,w:384,h:16,t:'Live: ON   |   A: LOD1   |   B: LOD2',s:'vx-iso'}
+    ]}
+  };
+
+  /* ===================== builder ===================== */
+  const LBC = {ao:['#326ec8','#143c8c','#fff'],nm:['#8080ff','#5050c8','#000'],col:['#ffc83c','#ff8c00','#000'],sel:['#46be5f','#146e32','#000'],id:['#aa6ed7','#64288c','#000'],vx:['#3cbebe','#146e6e','#000']};
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function build(key, interactive){
+    const sp = SPECS[key];
+    const root = document.createElement('div');
+    root.className = 'panel'; root.dataset.tool = key;
+    root.style.width = sp.w + 'px'; root.style.height = sp.h + 'px';
+    sp.items.forEach(it => {
+      const link = interactive && it.k !== 'g' && (it.s || it.go);
+      const el = document.createElement(link ? 'a' : 'div');
+      el.className = 'it ' + it.k + (it.on ? ' on' : '') + (it.cls && it.k !== 'lb' ? ' ' + it.cls : '');
+      el.dataset.s = it.s || '';
+      if (link) el.href = '#' + (it.go || it.s.split(' ')[0]);
+      if (it.tip && interactive) el.dataset.tip = it.tip;
+      if (it.k === 'g'){ const s = document.createElement('span'); s.textContent = it.t; el.appendChild(s); }
+      else if (it.k === 's') el.innerHTML = esc(it.t) + '<i style="background:' + it.c + '"></i>';
+      else if (it.k === 'sp'){ el.innerHTML = (it.t ? '<span>' + esc(it.t) + '</span>' : '') + '<span class="f">' + it.v + '</span>'; el.style.justifyContent = 'space-between'; }
+      else if (it.k === 'd') el.innerHTML = '<span>' + esc(it.t) + '</span>';
+      else if (it.k === 'pb') el.innerHTML = '<i></i>';
+      else if (it.html) el.innerHTML = it.html;
+      else el.textContent = it.t || '';
+      if (it.k === 'lb'){ const c = LBC[it.cls];
+        Object.assign(el.style, {justifyContent:'center', background:c[0], border:'2px solid ' + c[1], color:c[2], font:'700 12px Arial,sans-serif'}); }
+      if (it.k === 'lk') el.style.color = key === 'gen' ? '#32dcfa' : '#7cc8ff';
+      Object.assign(el.style, {left: it.x + 'px', top: it.y + 'px', width: it.w + 'px', height: it.h + 'px'});
+      root.appendChild(el);
+    });
+    return root;
+  }
+
+  const stack = $('stack'), win = $('win'), scroller = $('scroller');
+  const panels = {};
+  Object.keys(SPECS).forEach(k => { panels[k] = build(k, true); stack.appendChild(panels[k]); });
+  document.querySelectorAll('.mob').forEach(m => {
+    const k = m.dataset.mob, w = document.createElement('div'); w.className = 'mwin';
+    w.innerHTML = '<div class="tb"><b>' + SPECS[k].title + '</b><span class="x">×</span></div>';
+    const pnl = build(k, false); pnl.style.marginTop = '8px'; w.appendChild(pnl); m.appendChild(w);
+  });
+
+  /* ===================== state ===================== */
+  const ACC = {gen:'#e8e6e1', ao:'#326ec8', nm:'#8080ff', col:'#ffc83c', sel:'#46be5f', id:'#aa6ed7', vx:'#3cbebe'};
+  let curTool = null, curSec = null;
+  function sizeWin(){
+    const sp = SPECS[curTool]; if (!sp) return;
+    const room = win.parentElement.clientHeight - 90;
+    win.style.width = (sp.w + 2 + (sp.h + 36 > room ? 8 : 0)) + 'px';
+    win.style.height = Math.min(sp.h + 36, room) + 'px';
+    stack.style.height = (sp.h + 10) + 'px';
+  }
+  function setTool(t){
+    if (t === curTool) return; curTool = t;
+    Object.entries(panels).forEach(([k, p]) => p.classList.toggle('show', k === t));
+    sizeWin();
+    $('winTitle').textContent = SPECS[t].title;
+    document.documentElement.style.setProperty('--accent', ACC[t]);
+    document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('cur', a.dataset.t === t));
+    curSec = null;
+  }
+  function setSec(s){
+    if (s === curSec) return; curSec = s;
+    document.querySelectorAll('.sub').forEach(d => d.classList.toggle('cur', d.dataset.sec === s));
+    const p = panels[curTool]; if (!p) return;
+    let first = null;
+    p.querySelectorAll('.it').forEach(el => {
+      const hit = el.dataset.s.split(' ').includes(s);
+      el.classList.toggle('hit', hit);
+      if (hit && !first) first = el;
+    });
+    p.classList.toggle('focus', !!first && curTool !== 'gen');
+    const top = first ? Math.max(0, first.offsetTop - 34) : 0;
+    const view = scroller.clientHeight;
+    if (!first || top < scroller.scrollTop || first.offsetTop + Math.min(first.offsetHeight, view - 60) > scroller.scrollTop + view)
+      scroller.scrollTo({top, behavior: 'smooth'});
+  }
+  addEventListener('resize', sizeWin);
+
+  const subs = [...document.querySelectorAll('.sub')];
+  function spy(){
+    const line = innerHeight * 0.34;
+    let best = subs[0];
+    for (const s of subs){ if (s.getBoundingClientRect().top - line <= 0) best = s; else break; }
+    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) best = subs[subs.length - 1];
+    setTool(best.dataset.tool); setSec(best.dataset.sec);
+    const h = document.documentElement.scrollHeight - innerHeight;
+    $('progress').style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+  }
+  let ticking = false;
+  addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(() => { spy(); ticking = false; }); } }, {passive:true});
+  spy();
+
+  /* jumping from a replica control: flash the section it explains once we arrive */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const target = document.querySelector(a.getAttribute('href')); if (!target) return;
+    const sub = target.classList.contains('sub') ? target : target.querySelector('.sub');
+    if (!sub) return;
+    sub.classList.remove('flash');
+    let last = -1, still = 0;
+    (function waitStop(){
+      const y = scrollY;
+      if (y === last){ if (++still > 3){ void sub.offsetWidth; sub.classList.add('flash'); return; } } else still = 0;
+      last = y; requestAnimationFrame(waitStop);
+    })();
+  });
+
+  /* tooltip */
+  const tip = $('tip');
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest('[data-tip]');
+    if (!el){ tip.classList.remove('on'); return; }
+    tip.textContent = el.dataset.tip;
+    const r = el.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(r.left, innerWidth - 280)) + 'px';
+    tip.style.top = (r.bottom + 8) + 'px';
+    tip.classList.add('on');
+  });
+  addEventListener('scroll', () => tip.classList.remove('on'), {passive:true});
+})();
+</script>
 </body>
 </html>
