@@ -55,8 +55,18 @@ header.hero{max-width:1260px;margin:0 auto;padding:56px 24px 40px;display:grid;g
 .lb.sel{background:#46be5f;border-color:#146e32}.lb.sel:hover{background:#64d778}.lb.sel:active{background:#288c46}
 .lb.id{background:#aa6ed7;border-color:#64288c}.lb.id:hover{background:#c896eb}.lb.id:active{background:#8246af}
 .lb.vx{background:#3cbebe;border-color:#146e6e}.lb.vx:hover{background:#6edcdc}.lb.vx:active{background:#289696}
-.launcher .foot{margin:10px 18px 2px;color:#32dcfa;text-decoration:underline}
-.launcher .v{margin:0 18px 6px;color:#cfcfcf}
+/* logo cua launcher (giong tool: chu dam + 6 o mau dung tren chan chu) */
+.hlogo{margin:4px 19px 10px;font:700 26px/44px "Be Vietnam Pro","Segoe UI",Arial,sans-serif;color:#e8e6e1;white-space:nowrap;letter-spacing:-.01em}
+.hlogo .lbars,.mlogo .lbars{display:inline-flex;align-items:flex-end;gap:.11em;margin-left:.28em;height:.66em;vertical-align:baseline}
+.hlogo .lbars a,.mlogo .lbars a{display:block;width:.2em;height:100%;background:var(--c);transform-origin:50% 100%;
+  transition:transform .35s var(--ease),filter .2s}
+.hlogo .lbars a:hover,.mlogo .lbars a:hover{transform:scaleY(1.25);filter:brightness(1.18)}
+.boot .hlogo .lbars a{animation:rise .7s var(--ease) both}
+.boot .hlogo .lbars a:nth-child(1){animation-delay:.18s}.boot .hlogo .lbars a:nth-child(2){animation-delay:.25s}.boot .hlogo .lbars a:nth-child(3){animation-delay:.32s}
+.boot .hlogo .lbars a:nth-child(4){animation-delay:.39s}.boot .hlogo .lbars a:nth-child(5){animation-delay:.46s}.boot .hlogo .lbars a:nth-child(6){animation-delay:.53s}
+/* dong Version: xam, re chuot thi sang + gach chan (giong tool) */
+.launcher .v{display:block;margin:8px 19px 6px;color:#909090;font:11px/1.3 "Segoe UI",Tahoma,Arial,sans-serif;text-decoration:none;transition:color .2s}
+.launcher .v:hover{color:#d6d6d6;text-decoration:underline}
 .tb{height:24px;background:var(--mx-title);display:flex;align-items:center;justify-content:space-between;padding:0 8px;color:#e6e6e6;font:11px/1 var(--mx)}
 .tb b{font-weight:600}
 .tb .x{color:#aaa}
@@ -130,6 +140,9 @@ aside.side{position:sticky;top:18px;align-self:start;height:calc(100vh - 36px);d
 .panel .rb::before{content:"◉\00a0"}
 .panel .ck{justify-content:center;background:#46a050;border:1px solid #6b6b6b;border-radius:2px;color:#fff}
 .panel .lk{text-decoration:underline}
+.panel .mlogo{display:block;font:700 22px/36px "Be Vietnam Pro","Segoe UI",Arial,sans-serif;color:#e8e6e1;letter-spacing:-.01em;white-space:nowrap}
+.panel .ver{color:#909090;font-size:11px}
+.panel a.ver:hover{color:#d6d6d6;text-decoration:underline}
 /* focus mode: everything unrelated to the section being read steps back */
 .panel.focus .it{opacity:.3}
 .panel.focus .it.hit{opacity:1}
@@ -191,6 +204,20 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* ---------- am thanh (giong tool): nut bat/tat tren thanh tieu de + thong bao ---------- */
+.tbr{display:flex;align-items:center;gap:8px}
+.snd{width:20px;height:18px;padding:0;border:0;background:none;color:#aaa;cursor:pointer;display:grid;place-items:center;border-radius:3px;transition:color .2s,background-color .2s}
+.snd:hover{color:#fff;background:rgba(255,255,255,.08)}
+.snd svg{width:14px;height:14px}
+.snd .wave{transition:opacity .25s var(--ease)}
+.snd[aria-pressed="false"] .wave{opacity:0}
+.snd .cross{opacity:0;transition:opacity .25s var(--ease)}
+.snd[aria-pressed="false"] .cross{opacity:1}
+#sndToast{position:fixed;left:50%;bottom:28px;z-index:130;transform:translate(-50%,12px);opacity:0;pointer-events:none;
+  background:#15171a;color:#fff;font:500 13.5px/1.4 var(--sans);padding:9px 16px;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.4);
+  transition:opacity .25s var(--ease),transform .35s var(--ease)}
+#sndToast.on{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body class="boot">
@@ -202,19 +229,19 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
     <h1>làm tí tools<span class="bars" aria-hidden="true"><a href="#ao" style="--c:#326ec8"></a><a href="#normal" style="--c:#8080ff"></a><a href="#color" style="--c:#ffc83c"></a><a href="#select" style="--c:#46be5f"></a><a href="#id" style="--c:#aa6ed7"></a><a href="#vertex" style="--c:#3cbebe"></a></span></h1>
     <p>Không có mô tả.</p>
     <p>&nbsp;</p>
-    <p class="ver">Phiên bản <b>v1.7</b>, cập nhật 01/10/2026</p>
+    <p class="ver">Phiên bản <b>v2.4</b>, cập nhật 01/10/2026</p>
   </div>
   <div class="launcher" aria-label="Danh sách tool">
-    <div class="tb"><b>làm tí tools</b><span class="x">×</span></div>
+    <div class="tb"><b>thử làm tí tools</b><span class="tbr"><button class="snd" id="sndBtn" type="button" aria-pressed="true" title="Bật / tắt âm thanh (hoặc chuột phải vào logo)" aria-label="Bật / tắt âm thanh"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.5l3.5-3v10l-3.5-3H2.5z" fill="currentColor" stroke="none"/><path class="wave" d="M11 5.5a3.5 3.5 0 0 1 0 5M12.8 3.6a6 6 0 0 1 0 8.8"/><path class="cross" d="M11 6l4 4M15 6l-4 4"/></svg></button><span class="x">×</span></span></div>
     <div class="bd">
+      <div class="hlogo" aria-hidden="true">làm tí tools<span class="lbars"><a href="#ao" style="--c:#326ec8" title="làm tí AO"></a><a href="#normal" style="--c:#8080ff" title="làm tí Normal"></a><a href="#color" style="--c:#ffc83c" title="làm tí Color"></a><a href="#select" style="--c:#46be5f" title="làm tí Select"></a><a href="#id" style="--c:#aa6ed7" title="làm tí ID"></a><a href="#vertex" style="--c:#3cbebe" title="đếm tí Vertex"></a></span></div>
       <a class="lb ao" href="#ao">làm tí AO</a>
       <a class="lb nm" href="#normal">làm tí Normal</a>
       <a class="lb col" href="#color">làm tí Color</a>
       <a class="lb sel" href="#select">làm tí Select</a>
       <a class="lb id" href="#id">làm tí ID</a>
       <a class="lb vx" href="#vertex">đếm tí Vertex</a>
-      <div class="foot">Document - tool from A.I nên hên xui</div>
-      <div class="v">Version v1.7  -  01/10/2026</div>
+      <a class="v" href="#">Version v2.4  -  01/10/2026</a>
     </div>
   </div>
 </header>
@@ -231,7 +258,7 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
       <a class="gen" href="#errors" data-t="gen" title="Khi gặp lỗi">!</a>
     </nav>
     <div class="win" id="win">
-      <div class="tb"><b id="winTitle">làm tí tools</b><span class="x">×</span></div>
+      <div class="tb"><b id="winTitle">thử làm tí tools</b><span class="x">×</span></div>
       <div class="scroller" id="scroller"><div class="stack" id="stack"></div></div>
     </div>
     <p class="hint">Rê chuột lên nút để xem tooltip, bấm để đọc phần giải thích.</p>
@@ -387,30 +414,28 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
     <!-- ================= COLOR ================= -->
     <section class="tool" id="color">
       <div class="th"><h2>làm tí Color</h2><span class="chip col">làm tí Color</span></div>
-      <p class="lead">Bake màu (Diffuse) từ high poly sang low poly. Cách dùng giống làm tí Normal.</p>
+      <p class="lead">Bake màu (Diffuse) từ high poly sang low poly.</p>
       <div class="mob" data-mob="col"></div>
 
       <div class="sub" id="col-pairs" data-tool="col" data-sec="col-pairs">
-        <h3>Ghép cặp High / Low</h3>
-        <p>Giống hệt làm tí Normal: <span class="btnref">Pick High Poly</span>, <span class="btnref">Pick Low Poly</span>, <span class="btnref">Add Pair &gt;&gt;</span>. Remove Selected và Clear All để sửa danh sách.</p>
+        <h3>Các bước :</h3>
+        <p> <span class="btnref">Pick High Poly</span> <span class="btnref">Pick Low Poly</span> <span class="btnref">Add Pair &gt;&gt;</span></p>
       </div>
       <div class="sub" id="col-settings" data-tool="col" data-sec="col-settings">
         <h3>Bake Settings</h3>
         <div class="tw"><table class="doc">
-          <tr><th>Khác với làm tí Normal</th><th>làm tí Color</th></tr>
-          <tr><td>Renderer</td><td>tự chuyển sang Scanline</td></tr>
+          <tr><th>Thông số</th><th>Ý nghĩa&nbsp;</th></tr>
+          <tr><td>Renderer</td><td>Scanline</td></tr>
           <tr><td>UV Channel mặc định</td><td>1</td></tr>
-          <tr><td>Hậu tố file</td><td><code>_Color</code></td></tr>
-          <tr><td>MikkT / Bitangent</td><td>không có, bake màu không cần</td></tr>
+          <tr><td>Hậu tố tên file</td><td><code>_Color</code></td></tr>
+          <tr><td>MikkT / Bitangent</td><td>Không biết là gì,mà bake color chắc không cần</td></tr>
         </table></div>
-        <p>Map Size, Format, Padding, Push Amount, Output Folder giống làm tí Normal.</p>
+        <p>&nbsp;</p>
       </div>
       <div class="sub" id="col-bake" data-tool="col" data-sec="col-bake">
         <h3>Bake</h3>
         <ul>
-          <li>Bake màu gốc của high poly, không ánh sáng, không bóng đổ.</li>
-          <li>Giữ nguyên material của high poly vì màu đã setup sẵn trên đó.</li>
-          <li>Bake Selected / Bake All Pairs, thanh tiến trình và thông báo giống làm tí Normal.</li>
+          <li>Hình như bake xong, các low poly được gán map color để bạn xem kết quả ngay đó.</li>
         </ul>
       </div>
     </section>
@@ -418,67 +443,66 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
     <!-- ================= SELECT ================= -->
     <section class="tool" id="select">
       <div class="th"><h2>làm tí Select</h2><span class="chip sel">làm tí Select</span></div>
-      <p class="lead">Select Linked kiểu Blender: chọn vài face (hoặc vertex, edge), bấm nút để lan vùng chọn theo quy tắc.</p>
+      <p class="lead">Select Linked kiểu Blender.</p>
       <div class="mob" data-mob="sel"></div>
 
       <div class="sub" id="sel-modes" data-tool="sel" data-sec="sel-modes">
         <h3>Bốn kiểu lan vùng chọn</h3>
         <div class="tw"><table class="doc">
-          <tr><th>Nút</th><th>Lan tới</th></tr>
-          <tr><td><span class="btnref">Element</span></td><td>toàn bộ phần dính liền</td></tr>
-          <tr><td><span class="btnref">Material</span></td><td>các face cùng Material ID</td></tr>
-          <tr><td><span class="btnref">Smoothgroup</span></td><td>chỉ qua cạnh mà hai face chung Smoothing Group, dừng ở cạnh sharp</td></tr>
-          <tr><td><span class="btnref">UV Island</span></td><td>chỉ qua cạnh không nằm trên seam UV; chọn kênh UV ở ô <span class="btnref">UVchannel</span></td></tr>
+          <tr><th>Nút</th><th>Lây lan&nbsp;</th></tr>
+          <tr><td><span class="btnref">Element</span></td><td>toàn bộ Element.</td></tr>
+          <tr><td><span class="btnref">Material</span></td><td>Face cùng  ID.</td></tr>
+          <tr><td><span class="btnref">Smoothgroup</span></td><td>tới hard edge.&nbsp;</td></tr>
+          <tr><td><span class="btnref">UV Island</span></td><td>tới seam edge.&nbsp; </td></tr>
         </table></div>
       </div>
       <div class="sub" id="sel-open" data-tool="sel" data-sec="sel-open">
         <h3>Open Edges*</h3>
-        <p>Tìm cạnh hở, tức lỗ trên mesh.</p>
+        <p>Tìm cạnh hở    .</p>
         <ul>
-          <li><b>Chuột trái</b>: bật xem trước. Viewport chuyển sang Clay, cạnh hở hiện màu xanh lam và tự cập nhật khi bạn sửa mesh. Bấm trái lần nữa để tắt và trả shading cũ.</li>
-          <li><b>Chuột phải</b>: chọn thật các cạnh hở và chuyển sang cấp Edge.</li>
+          <li><b>Chuột trái</b>: bật xem.</li>
+          <li><b>Chuột phải</b>: chọn   cạnh hở.</li>
         </ul>
       </div>
       <div class="sub" id="sel-where" data-tool="sel" data-sec="sel-where">
         <h3>Dùng được ở đâu</h3>
-        <p>Cấp Vertex, Edge, Polygon của Editable Poly hoặc Edit Poly, và trong UV Editor của Unwrap UVW. Chọn nhiều object cùng lúc cũng được. Object chưa có modifier thì tool tự thêm Edit Poly.</p>
+        <p>Ở đâu còn lâu mới nói,à mà đang unwrap không check được nhé!</p>
       </div>
     </section>
 
     <!-- ================= ID ================= -->
     <section class="tool" id="id">
       <div class="th"><h2>làm tí ID</h2><span class="chip id">làm tí ID</span></div>
-      <p class="lead">Bảng Material ID của Multi/Sub đang dùng trên object chọn, xếp theo ID tăng dần. Chưa chọn object thì bảng hiện “Chọn object Editable Poly”.</p>
+      <p class="lead">Dùng chữa cháy thay thế bảng "M" của 3dsmax. Trực quan,thao tác đơn giản,đỡ tù túng như mặc định.&nbsp; &nbsp; &nbsp;</p>
       <div class="mob" data-mob="id"></div>
 
       <div class="sub" id="id-multi" data-tool="id" data-sec="id-multi">
-        <h3>Multi/Sub đang xem</h3>
+        <h3>Multi/Sub</h3>
         <ul>
-          <li>Ô trên cùng là tên Multi/Sub. Double-click để đổi tên.</li>
-          <li>Nút <span class="btnref">▼</span> mở danh sách để chuyển sang Multi/Sub khác.</li>
-          <li>Dòng chữ xanh bên dưới liệt kê các object đang dùng.</li>
+          <li>Ở đâu có chữ thì  Double-click để đổi tên,đổi ID (đặt ID).</li>
+          <li>Nút <span class="btnref">▼</span> mở danh sách để chuyển sang Multi/Sub khác nếu đang chọn nhiều object và khác material.&nbsp; &nbsp;&nbsp;</li>
+          <li>Dòng chữ xanh là để tìm object bị lạc trong scene,nếu  chọn nhiều quá mà không biết object đang thao tác nó ở where?&nbsp;&nbsp;</li>
         </ul>
       </div>
       <div class="sub" id="id-rows" data-tool="id" data-sec="id-rows">
         <h3>Thao tác trên bảng</h3>
         <div class="tw"><table class="doc">
           <tr><th>Thao tác</th><th>Kết quả</th></tr>
-          <tr><td>Click 1 dòng</td><td>Chọn các face có ID đó. Giữ <kbd>Shift</kbd> để cộng dồn.</td></tr>
-          <tr><td>Double-click cột Material</td><td>Đổi tên material ngay trên dòng.</td></tr>
-          <tr><td>Double-click cột ID</td><td>Đổi ID cho face. ID lớn hơn ID cao nhất thì tool tự tạo đủ slot còn thiếu. ID hợp lệ từ 1 đến 65535.</td></tr>
-          <tr><td>Kéo thả vào giữa 1 dòng</td><td>Hoán đổi ID hai dòng, face đi theo material.</td></tr>
-          <tr><td>Kéo thả vào khe giữa 2 dòng</td><td>Chèn ID: tạo bản copy material ở vị trí mới, các ID phía sau dồn lên.</td></tr>
-          <tr><td>Click ô màu</td><td>Mở thông số material trong Material Editor.</td></tr>
-          <tr><td>Chuột phải 1 dòng</td><td>Gán ID của dòng cho face đang chọn (cấp Polygon hoặc Element).</td></tr>
+          <tr><td>Click</td><td>Chọn các face có ID đó. Giữ <kbd>Shift</kbd> để cộng dồn.</td></tr>
+          <tr><td>Double-click  Material</td><td>Đổi tên material.</td></tr>
+          <tr><td>Double-click  ID</td><td>Đổi ID cho face.</td></tr>
+          <tr><td>Kéo thả ID này vào ID khác</td><td>Hoán đổi ID.</td></tr>
+          <tr><td>Kéo thả vào "khe" giữa 2 ID</td><td>Chèn ID.</td></tr>
+          <tr><td>Click vào ô màu</td><td>Mở Material Editor.</td></tr>
+          <tr><td>Chuột phải (chọn face trước)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</td><td>Gán ID cho face đang chọn.&nbsp;</td></tr>
         </table></div>
-        <p>Bảng tự sáng dòng theo face bạn chọn ngoài viewport và cập nhật khi Undo/Redo.</p>
+        <p>Kéo thả từ từ thôi nha,sai thì ráng chịu! à vẫn undo được nhưng hơi chậm tí! đừng bực..&nbsp; &nbsp; &nbsp; &nbsp;</p>
       </div>
       <div class="sub" id="id-filter" data-tool="id" data-sec="id-filter">
         <h3>Lọc và cảnh báo</h3>
         <ul>
-          <li>Tick <span class="btnref">Chỉ hiện ID có mesh</span> để ẩn slot không có face nào.</li>
-          <li>Dòng chữ đỏ “Object chưa có Multi/Sub-Object – bấm để gán” hiện khi object có nhiều ID mà chưa dùng Multi/Sub. Bấm vào để tạo; các slot mới có màu ngẫu nhiên cho dễ phân biệt.</li>
-          <li>Multi/Sub có slot trống bị trùng ID thì tool hỏi tự sửa: xoá slot trống và xếp lại theo ID.</li>
+          <li>Tick vào&nbsp; <span class="btnref">Chỉ hiện ID có mesh</span> &nbsp;để chỉ hiện face có ID.</li>
+          <li>Sẽ có dòng chữ đỏ “Object chưa có Multi/Sub-Object – bấm để gán” hiện  khi object chưa gán chất liệu Multi/Sub. Bấm vào để tạo luôn cho.</li>
         </ul>
       </div>
     </section>
@@ -486,19 +510,19 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
     <!-- ================= VERTEX ================= -->
     <section class="tool" id="vertex">
       <div class="th"><h2>đếm tí Vertex</h2><span class="chip vx">đếm tí Vertex</span></div>
-      <p class="lead">Đếm vertex hình học (Geo) và vertex UV của từng layer LOD, so với budget. Kéo giãn cửa sổ để bảng rộng hơn; kích thước được nhớ cho lần sau.</p>
+      <p class="lead">Check vertex kèm swap LOD.&nbsp;&nbsp;</p>
       <div class="mob" data-mob="vx"></div>
 
       <div class="sub" id="vx-scope" data-tool="vx" data-sec="vx-scope">
         <h3>Phạm vi và Live Check</h3>
         <ul>
-          <li><span class="btnref">All Layers</span> đếm mọi layer có chữ LOD1…LOD5 trong tên. <span class="btnref">Selected Objs</span> chỉ đếm layer chứa object đang chọn.</li>
-          <li><span class="btnref">Live Check</span> bật (nút xanh) thì đếm lại mỗi nửa giây, tiện khi đang tối ưu mesh. Bấm lần nữa để dừng.</li>
+          <li>Để object đúng layer mới đếm được nha,bỏ lung tung rồi tên layer không đúng thì chịu chết.&nbsp; &nbsp;&nbsp;</li>
+          <li><span class="btnref">Live Check</span> bật live thì live.</li>
         </ul>
       </div>
       <div class="sub" id="vx-table" data-tool="vx" data-sec="vx-table">
-        <h3>Đọc bảng</h3>
-        <p>Ô Geo và UV <b>xanh lá</b> là trong budget, <b>đỏ</b> là vượt. Object tên chứa <code>caliper</code>, <code>motion</code>, <code>emissive</code> không được tính. Object có modifier được đếm trên mesh sau modifier.</p>
+        <h3>Cách đọc bảng</h3>
+        <p>Xanh bỏ đỏ mua (stock)</p>
         <div class="tw"><table class="doc">
           <tr><th>LOD</th><th>Geo Limit</th><th>UV Limit</th></tr>
           <tr><td>LOD1</td><td>45 000</td><td>48 000</td></tr>
@@ -509,17 +533,17 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
         </table></div>
       </div>
       <div class="sub" id="vx-iso" data-tool="vx" data-sec="vx-iso">
-        <h3>Isolate và chuyển LOD</h3>
+        <h3>Swap LOD</h3>
         <ul>
-          <li>Click 1 dòng để isolate layer đó; ô Layer tô xanh (A). Click lại dòng đó hoặc chuột phải để Show All.</li>
-          <li><span class="btnref">&lt; Prev</span> và <span class="btnref">Next &gt;</span> isolate LOD trước/sau.</li>
-          <li><span class="btnref">Swap A&lt;&gt;B</span> nhảy qua lại giữa hai LOD vừa xem; LOD trước đó tô vàng (B).</li>
-          <li><span class="btnref">Show All</span> hiện lại mọi object. Dòng dưới cùng báo trạng thái Live, A và B.</li>
+          <li>Bấm LOD nào thì show only LOD đó.&nbsp;</li>
+          <li><span class="btnref">&lt; Prev</span> và <span class="btnref">Next &gt;</span> Tới lui.</li>
+          <li><span class="btnref">Swap A&lt;&gt;B</span> Swap (swap giữa 2 ô xanh dương và vàng,còn sao để hiện 2 màu đó thì bấm đại đi nó sẽ ra).&nbsp; &nbsp; &nbsp;&nbsp;</li>
+          <li><span class="btnref">Show All</span> &nbsp;Unhide all.</li>
         </ul>
       </div>
       <div class="sub" id="vx-hotkey" data-tool="vx" data-sec="vx-hotkey">
         <h3>Phím tắt</h3>
-        <p>Vào <b>Customize › Hotkey Editor</b>, tìm nhóm <b>LOD Budget Checker</b>: LOD Next, LOD Prev, LOD Swap A&lt;&gt;B, LOD Live Toggle. Phím tắt chỉ chạy khi bảng đếm tí Vertex đang mở.</p>
+        <p>Khỏi đặt luôn đi,không cần thiết.&nbsp;</p>
       </div>
     </section>
 
@@ -528,25 +552,18 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
       <h2>Khi gặp lỗi</h2>
       <div class="sub" id="gen-err" data-tool="gen" data-sec="gen-err">
         <div class="tw"><table class="doc">
-          <tr><th>Thông báo / hiện tượng</th><th>Cách xử lý</th></tr>
-          <tr><td>Không tìm thấy Renderer Arnold (MAXtoA)</td><td>Bật plugin Arnold trong Plug-in Manager rồi chạy lại.</td></tr>
-          <tr><td>Không có object nào nằm trong layer LOD1 / LOD4 / LOD5</td><td>Đổi tên layer đúng chính xác LOD1, LOD4, LOD5.</td></tr>
-          <tr><td>Render UV (…) thất bại</td><td>Mở MAXScript Listener (<kbd>F11</kbd>) xem dòng lỗi, thường do object thiếu UV channel cần render.</td></tr>
-          <tr><td>Không tìm thấy object 'CARPAINT_attribute_blue'</td><td>Chạy AO Setup trước, hoặc dùng Custom Bake.</td></tr>
-          <tr><td>Không tìm thấy CARPAINT_LOD4 và DETAILS_LOD4</td><td>Chạy AO Setup và chọn LOD4.</td></tr>
-          <tr><td>AO vẫn bị ĐEN sau 3 lần bake</td><td>Kiểm tra mesh có UV channel 1 và normal không bị lật, rồi bake lại.</td></tr>
-          <tr><td>Normal map lủng, có vùng đen</td><td>Tăng Push Amount để cage bao trọn high poly.</td></tr>
-          <tr><td>Please pick both a High Poly and a Low Poly…</td><td>Pick đủ cả high và low trước khi Add Pair.</td></tr>
-          <tr><td>No LOD layer found in scene.</td><td>Layer cần có chữ LOD1…LOD5 trong tên.</td></tr>
-          <tr><td>Chữ tiếng Việt hiện dấu hỏi</td><td>File bị lưu sai encoding. Lưu lại dạng UTF-8 with BOM.</td></tr>
-        </table></div>
-        <p>Lỗi khác: copy nguyên dòng lỗi trong MAXScript Listener, kèm phiên bản 3ds Max đang dùng, gửi lại để sửa.</p>
-      </div>
+          <tr><th>Cách xử lý : bình tĩnh,cầm điện thoại lên nhắn tin hoặc gọi báo C.A (...)&nbsp; &nbsp;&nbsp;</th></tr>
+          <tr></tr>
+<tr></tr>
+          <tr></tr>
+          <tr></tr>
+</table></div>
+</div>
     </section>
   </main>
 </div>
 
-<footer>làm tí tools v1.7, cập nhật 01/10/2026. Tool from A.I nên hên xui, gặp lỗi cứ báo để sửa.</footer>
+<footer>Tool tro cốt từ  A.I nên xài cũng hên xui lắm nha,vui vẻ không quạu.</footer>
 
 <script>
 (function(){
@@ -595,15 +612,15 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
   }
 
   const SPECS = {
-    gen: {title:'làm tí tools', w:212, h:240, items:[
-      {k:'lb',x:16,y:8,w:178,h:27,t:'làm tí AO',cls:'ao',go:'ao',tip:'Mở / đóng bảng làm tí AO'},
-      {k:'lb',x:16,y:39,w:178,h:27,t:'làm tí Normal',cls:'nm',go:'normal',tip:'Bake Normal: High Poly > Low Poly'},
-      {k:'lb',x:16,y:70,w:178,h:27,t:'làm tí Color',cls:'col',go:'color',tip:'Bake Color: High Poly > Low Poly'},
-      {k:'lb',x:16,y:101,w:178,h:27,t:'làm tí Select',cls:'sel',go:'select',tip:'Select Linked: Element / Material / Smoothgroup / UV Island / Open Edges'},
-      {k:'lb',x:16,y:132,w:178,h:27,t:'làm tí ID',cls:'id',go:'id',tip:'Material Select: bảng Material ID / Multi/Sub'},
-      {k:'lb',x:16,y:163,w:178,h:27,t:'đếm tí Vertex',cls:'vx',go:'vertex',tip:'LOD Budget Checker: đếm vertex/UV theo layer LOD'},
-      {k:'lk',x:16,y:198,w:178,h:16,t:'Document - tool from A.I nên hên xui',s:'gen-err',tip:'Mở trang hướng dẫn này'},
-      {k:'l',x:16,y:216,w:178,h:16,t:'Version v1.7  -  01/10/2026',s:'gen-err'}
+    gen: {title:'thử làm tí tools', w:212, h:258, items:[
+      {k:'mlogo',x:16,y:6,w:178,h:36},
+      {k:'lb',x:16,y:48,w:178,h:27,t:'làm tí AO',cls:'ao',go:'ao',tip:'Mở / đóng bảng làm tí AO'},
+      {k:'lb',x:16,y:79,w:178,h:27,t:'làm tí Normal',cls:'nm',go:'normal',tip:'Bake Normal: High Poly > Low Poly'},
+      {k:'lb',x:16,y:110,w:178,h:27,t:'làm tí Color',cls:'col',go:'color',tip:'Bake Color: High Poly > Low Poly'},
+      {k:'lb',x:16,y:141,w:178,h:27,t:'làm tí Select',cls:'sel',go:'select',tip:'Select Linked: Element / Material / Smoothgroup / UV Island / Open Edges'},
+      {k:'lb',x:16,y:172,w:178,h:27,t:'làm tí ID',cls:'id',go:'id',tip:'Material Select: bảng Material ID / Multi/Sub'},
+      {k:'lb',x:16,y:203,w:178,h:27,t:'đếm tí Vertex',cls:'vx',go:'vertex',tip:'LOD Budget Checker: đếm vertex/UV theo layer LOD'},
+      {k:'ver',x:16,y:236,w:178,h:16,t:'Version v2.4  -  01/10/2026',s:'gen-err'}
     ]},
     ao: {title:'làm tí AO', w:210, h:726, items:[
       {k:'g',x:5,y:5,w:202,h:66,t:'Output',s:'ao-output'},
@@ -705,6 +722,9 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
       else if (it.k === 'sp'){ el.innerHTML = (it.t ? '<span>' + esc(it.t) + '</span>' : '') + '<span class="f">' + it.v + '</span>'; el.style.justifyContent = 'space-between'; }
       else if (it.k === 'd') el.innerHTML = '<span>' + esc(it.t) + '</span>';
       else if (it.k === 'pb') el.innerHTML = '<i></i>';
+      else if (it.k === 'mlogo') el.innerHTML = 'làm tí tools<span class="lbars">' +
+        [['ao','#326ec8'],['normal','#8080ff'],['color','#ffc83c'],['select','#46be5f'],['id','#aa6ed7'],['vertex','#3cbebe']]
+          .map(b => interactive ? '<a href="#' + b[0] + '" style="--c:' + b[1] + '"></a>' : '<i style="display:block;width:.2em;height:100%;background:' + b[1] + '"></i>').join('') + '</span>';
       else if (it.html) el.innerHTML = it.html;
       else el.textContent = it.t || '';
       if (it.k === 'lb'){ const c = LBC[it.cls];
@@ -803,6 +823,98 @@ footer{max-width:1260px;margin:0 auto;padding:24px;color:var(--muted);border-top
     tip.classList.add('on');
   });
   addEventListener('scroll', () => tip.classList.remove('on'), {passive:true});
+})();
+</script>
+
+<div id="sndToast" role="status" aria-live="polite"></div>
+<script>
+/* ===================== AM THANH (giong tool trong 3ds Max) =====================
+   - Mo trang: chuong 6 not di len, khop nhip 6 o mau dang moc len.
+     Trinh duyet chan tu phat am thanh khi chua co thao tac, nen neu bi chan
+     thi chuong se phat o lan bam / go phim dau tien (trong vai giay dau).
+   - Re chuot qua tung o mau tren logo: moi o 1 not C5 D5 E5 G5 A5 C6.
+   - Chuot phai vao logo hoac bam nut loa tren thanh tieu de: bat / tat.
+   - Am thanh tu tong hop bang Web Audio, khong can file. */
+(function(){
+  const FREQ = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5];
+  const KEY = 'lamti-sound';
+  let enabled = true;
+  try { enabled = localStorage.getItem(KEY) !== 'off'; } catch(e){}
+  let ctx = null, master = null, chimed = false;
+  const loadAt = performance.now();
+  const btn = document.getElementById('sndBtn'), toast = document.getElementById('sndToast');
+
+  function ensure(){
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0.55;
+    const comp = ctx.createDynamicsCompressor();
+    master.connect(comp); comp.connect(ctx.destination);
+    return ctx;
+  }
+  // 1 not chuong: song sin + hoa am bac 2, vao nhanh roi ngan va tat dan (giong file WAV cua tool)
+  function bell(freq, delay, vol){
+    const t0 = ctx.currentTime + delay;
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0, t0);
+    env.gain.linearRampToValueAtTime(vol, t0 + 0.006);
+    env.gain.setTargetAtTime(0, t0 + 0.006, 1 / 4.5);
+    const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = freq; o1.connect(env);
+    const h2 = ctx.createGain();
+    h2.gain.setValueAtTime(0, t0); h2.gain.linearRampToValueAtTime(0.3, t0 + 0.006); h2.gain.setTargetAtTime(0, t0 + 0.006, 1 / 7);
+    const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = freq * 2; o2.connect(h2); h2.connect(env);
+    env.connect(master);
+    o1.start(t0); o2.start(t0); o1.stop(t0 + 1.4); o2.stop(t0 + 1.4);
+  }
+  function chime(){ FREQ.forEach((f, i) => bell(f, 0.03 + i * 0.07, 0.3)); }
+  const ready = () => enabled && ctx && ctx.state === 'running';
+
+  function playChimeOnce(){
+    if (chimed || !ready()) return;
+    chimed = true;
+    if (performance.now() - loadAt < 6000) chime();   // chi phat khi vua mo trang
+  }
+
+  // Mo trang: thu phat ngay; neu bi chan thi doi thao tac dau tien
+  if (enabled && ensure() && ctx.state === 'running') playChimeOnce();
+  function unlock(){
+    if (!enabled || !ensure()) return;
+    if (ctx.state !== 'running') ctx.resume().then(playChimeOnce).catch(() => {});
+    else playChimeOnce();
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => addEventListener(ev, unlock, {capture:true, passive:true}));
+
+  // Re chuot qua o mau tren moi logo (tieu de trang, launcher, bang ben trai)
+  document.addEventListener('mouseover', e => {
+    const bar = e.target.closest('.bars a, .lbars a');
+    if (!bar || !ready()) return;
+    const idx = Array.prototype.indexOf.call(bar.parentNode.children, bar);
+    if (idx >= 0 && idx < 6) bell(FREQ[idx], 0, 0.45);
+  });
+
+  let toastTimer = 0;
+  function say(msg){
+    toast.textContent = msg; toast.classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('on'), 2200);
+  }
+  function setEnabled(on){
+    enabled = on;
+    try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch(e){}
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (on){
+      if (ensure()){ ctx.resume().then(() => chime()).catch(() => {}); }
+      say('Đã bật âm thanh');
+    } else say('Đã tắt âm thanh (chuột phải logo để bật lại)');
+  }
+  btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+  btn.addEventListener('click', e => { e.stopPropagation(); setEnabled(!enabled); });
+
+  // Chuot phai vao logo = bat / tat (giong tool)
+  document.addEventListener('contextmenu', e => {
+    if (e.target.closest('.hero h1, .hlogo, .mlogo')){ e.preventDefault(); setEnabled(!enabled); }
+  });
 })();
 </script>
 </body>
